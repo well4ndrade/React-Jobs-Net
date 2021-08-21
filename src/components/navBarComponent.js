@@ -74,7 +74,7 @@ function NavBar(props) {
     window.location.href = "/";
   }
 
-  const usuario = localStorage.getItem("@nome");
+  const usuario = localStorage.getItem("@login");
 
   const drawer = (
     <div>

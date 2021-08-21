@@ -74,7 +74,7 @@ export default function AcessoSistema() {
         } else {
             setError('')
             try {
-                const { data: response } = await api.post("/Logins", {
+                 api.get("https://localhost:5001/Logins", {
                     login,
                     passwd
                 });
