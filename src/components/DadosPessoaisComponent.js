@@ -8,6 +8,10 @@ import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MenuItem from '@material-ui/core/MenuItem';
+import Paper from "@material-ui/core/Paper";
+import Button from "@material-ui/core/Button";
+
+
 
 const generos = [
     {
@@ -51,6 +55,11 @@ const generos = [
         margin: theme.spacing(1),
         width: '25ch',
       },
+      paper: {
+        padding: theme.spacing(2),
+        textAlign: 'center',
+        color: theme.palette.text.secondary,
+    },
     },
   }));
   
@@ -69,31 +78,46 @@ const generos = [
     };
 
 
+
     return (
+      <Paper className={classes.paper}>
     <div>
-    
-      <div className={classes.margin}>
-        <Grid container spacing={1} alignItems="flex-end">
+    <Grid container spacing={1}>
+  
+        <Grid container item xs={3} spacing={3}>
+          <Grid item>
+            <AccountCircle />
+          </Grid>
+          <Grid item xs={6}>
+            <TextField  label="Nome Completo" />
+          </Grid>
+          </Grid>
+       
+      
+
+          <Grid container item xs={3} spacing={3}>
+          <Grid item>
+            <AccountCircle/>
+          </Grid>
+          <Grid item>
+            <TextField label="RG" />
+          </Grid>
+          </Grid>
+        
+      
+
+          <Grid container item xs={3} spacing={3}>
           <Grid item>
             <AccountCircle />
           </Grid>
           <Grid item>
-            <TextField id="input-with-icon-grid" label="Nome Completo" />
+            <TextField label="CPF" />
           </Grid>
-        </Grid>
-      </div>
-      <div className={classes.margin}>
-        <Grid container spacing={1} alignItems="RG">
-          <Grid item>
-            <AccountCircle />
           </Grid>
-          <Grid item>
-            <TextField id="input-with-icon-grid" label="CPF" />
-          </Grid>
-        </Grid>
-      </div>
-      <div className={classes.margin}>
-        <Grid container spacing={1} alignItems="flex-end">
+          
+       
+      
+          <Grid container item xs={3} spacing={3}>
           <Grid item>
             <AccountCircle />
           </Grid>
@@ -116,39 +140,42 @@ const generos = [
         </TextField>
         </Grid>
         </Grid>
-      </div>
-      <div className={classes.margin}>
-        <Grid container spacing={1} alignItems="flex-end">
+       
+      
+
+        <Grid container item xs={3} spacing={3}>
           <Grid item>
             <AccountCircle />
           </Grid>
           <Grid item>
-            <TextField id="input-with-icon-grid" label="Data Nascimento" />
+            <TextField label="Data Nascimento" />
           </Grid>
-        </Grid>
-      </div>
-      <div className={classes.margin}>
-        <Grid container spacing={1} alignItems="flex-end">
+          </Grid>
+        
+      
+
+          <Grid container item xs={3} spacing={3}>
           <Grid item>
             <AccountCircle />
           </Grid>
           <Grid item>
-            <TextField id="input-with-icon-grid" label="Celular" />
+            <TextField label="Celular" />
           </Grid>
-        </Grid>
-      </div>
-      <div className={classes.margin}>
-        <Grid container spacing={1} alignItems="flex-end">
+          </Grid>
+        
+
+          <Grid container item xs={3} spacing={3}>
           <Grid item>
             <AccountCircle />
           </Grid>
           <Grid item>
-            <TextField id="input-with-icon-grid" label="Telefone" />
+            <TextField label="Telefone" />
           </Grid>
-        </Grid>
-      </div>
-      <div className={classes.margin}>
-        <Grid container spacing={1} alignItems="flex-end">
+          </Grid>
+       
+      
+
+          <Grid container item xs={3} spacing={3}>
           <Grid item>
             <AccountCircle />
           </Grid>
@@ -171,37 +198,51 @@ const generos = [
         </TextField>
         </Grid>
         </Grid>
-      </div>
-      <div className={classes.margin}>
-        <Grid container spacing={1} alignItems="flex-end">
+        
+    
+        <Grid container item xs={3} spacing={3}>
           <Grid item>
             <AccountCircle />
           </Grid>
           <Grid item>
-            <TextField id="input-with-icon-grid" label="E-mail" />
+            <TextField label="E-mail" />
           </Grid>
-        </Grid>
-      </div><div className={classes.margin}>
-        <Grid container spacing={1} alignItems="flex-end">
+          </Grid>
+        
+
+          <Grid container item xs={3} spacing={3}>
           <Grid item>
             <AccountCircle />
           </Grid>
           <Grid item>
-            <TextField id="input-with-icon-grid" label="Possui Veículo?" />
+            <TextField label="Possui Veículo?" />
           </Grid>
-        </Grid>
-      </div>
-      <div className={classes.margin}>
-        <Grid container spacing={1} alignItems="flex-end">
+          </Grid>
+        
+
+          <Grid container item xs={3} spacing={3}>
           <Grid item>
             <AccountCircle />
           </Grid>
           <Grid item>
-            <TextField id="input-with-icon-grid" label="Possui Habilitação?" />
+            <TextField label="Possui Habilitação?" />
           </Grid>
-        </Grid>
-      </div>
+          </Grid>
+          <div><br /></div>
+            <Grid item xs={12}>
+        <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              fullWidth={true}>
+              AVANÇAR
+          </Button>
+            </Grid>
+       
       
+      
+        </Grid>
     </div>
+    </Paper>
   );
 }

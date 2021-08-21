@@ -6,7 +6,12 @@ import AdminPage             from "./pages/AdminPage"
 import CadastroPage          from "./pages/CadastroPage"
 import LoginPage             from "./pages/LoginPage"
 import cadastroUsuarioPage   from "./pages/cadastroUsuarioPage"
+<<<<<<< HEAD
 
+=======
+import DadosPessoaisPage   from "./pages/DadosPessoaisPage"
+import EnderecoPage        from "./pages/EnderecoPage"
+>>>>>>> b3f3d8315766705b4c515a008b37f37a37203a51
 
 const Routes = ()=>(
     <BrowserRouter>
@@ -14,6 +19,7 @@ const Routes = ()=>(
             <Route exact path="/portal/home" component={HomePage} />
             <Route exact path="/portal/admin" component={AdminPage} />
             <Route exact path="/portal/cadastro" component={CadastroPage} />
+            <Route exact path="/portal/endereco" component={EnderecoPage} />
             <Route exact path="/portal/login" component={LoginPage} />
             <Route exact path="/portal/cadastroUsuario" component={cadastroUsuarioPage} />
             <Route path="*"> <Redirect to="/portal/login" /> </Route>
