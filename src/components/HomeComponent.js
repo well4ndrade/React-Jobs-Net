@@ -13,18 +13,18 @@ const useStyles = makeStyles((theme) => ({
 
 export default function HomeComponent() {
     const classes = useStyles()
-    const [dadosEndereco, setEnderecos] = useState([]);
+    const [dadosVagas, setVagas] = useState([]);
     const [carregando, setCarregando] = useState('');
 
-    async function listaEnderecos() {
+    async function listaVagas() {
         setCarregando(true)
         try {
 
             // ------------------------------------------------------------------
-            axios.get('/Enderecos').then(function (response) {
+            axios.get('/Vagas').then(function (response) {
                 console.log(response);
 
-                setEnderecos(response.data)
+                setVagas(response.data)
                 setCarregando(false)
 
             }).catch(function (error) {
@@ -47,13 +47,13 @@ export default function HomeComponent() {
     }
     useEffect(() => {
         localStorage.setItem('@nome', 'ARTHUR')
-        listaEnderecos()
+        listaVagas()
     }, [])
 
     const columns = [
-        { name: "id", label: "ID" },
-        { name: "cep", label: "CEP" },
-        { name: "logradouro", label: "Rua" },
+        { name: "id", label: "CPF" },
+        { name: "nome", label: "Nome" },
+        { name: "descricao", label: "Descrição" },
        
     ];
 
@@ -91,8 +91,8 @@ export default function HomeComponent() {
             <Paper>
                 <MUIDataTable
                     className="table"
-                    title={"Enderecos"}
-                    data={dadosEndereco}
+                    title={"Vagas"}
+                    data={dadosVagas}
                     columns={columns}
                     options={options}
                 />

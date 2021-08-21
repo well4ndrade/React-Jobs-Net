@@ -62,6 +62,8 @@ export default function AcessoSistema() {
     const [login, setLogin] = useState('');
     const [passwd, setPasswd] = useState('');
     const [error, setError] = useState('');
+    const [passwdConfirm, setPasswdConfirm] = useState('');
+    
 
     useEffect(() => { console.log("Deu erro") }, [error])
 
@@ -74,7 +76,7 @@ export default function AcessoSistema() {
         } else {
             setError('')
             try {
-                const { data: response } = await api.post("/Logins", {
+                const { data: response } = await api.post("/login", {
                     login,
                     passwd
                 });
@@ -115,7 +117,7 @@ export default function AcessoSistema() {
                 </Grid>
                 <Typography variant="h3" component="h2" gutterBottom>
                 
-                    JobsNet
+                    Criando Cadastro
                 </Typography>
                 <form className={classes.form} onSubmit={handleSignIn} autoComplete="off">
                     <TextField
@@ -133,12 +135,24 @@ export default function AcessoSistema() {
                         variant="filled"
                         required
                         name="password"
-                        label="Senha"
+                        label="Senha (Max = 8 digitos)"
                         type="password"
                         id="password"
                         autoComplete="off"
                         onChange={(e) => setPasswd(e.target.value)}
                     />
+                    <TextField
+                        className={classes.input}
+                        variant="filled"
+                        required
+                        name="passwordConfirm"
+                        label="Confirme a Senha"
+                        type="password"
+                        id="passwordConfirm"
+                        autoComplete="off"
+                        onChange={(e) => setPasswdConfirm(e.target.value)}
+                    />
+
                     <Button
                         type="submit"
                         fullWidth
@@ -146,16 +160,7 @@ export default function AcessoSistema() {
                         color="primary"
                         className={classes.submit}
                     >
-                        Logar
-                    </Button>
-                    <Button
-                        type="submit"
-                        fullWidth
-                        variant="contained"
-                        color="primary"
-                        className={classes.submit}
-                    >
-                        Cadastrar
+                        Criar Cadastro
                     </Button>
                     {error && <p>{error}</p>}
                     <Grid container>

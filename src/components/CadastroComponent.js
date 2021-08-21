@@ -40,7 +40,10 @@ export default function CadastroComponent() {
     async function cadastraVagas(e) {
         e.preventDefault();
         try {
-            axios.post('https://localhost:5001/Vagas').then(function(response) {
+            axios.post('https://localhost:5001/Vagas',{
+                nome: nome,
+                descricao: descricao
+              }).then(function(response) {
                 console.log(response);
                 setRetorno(response.data)
               

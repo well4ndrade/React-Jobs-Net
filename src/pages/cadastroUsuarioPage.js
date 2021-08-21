@@ -1,9 +1,9 @@
 import React from 'react';
 
-import AcessoSistema from '../components/loginComponent.js'
+import AcessoSistema from '../components/cadastroUsuarioComponent.js'
 import './login.css';
 
-function loginPage() {
+function cadastroUsuarioPage() {
     return (
         <div className="login" >
             <AcessoSistema > </AcessoSistema>
@@ -11,4 +11,4 @@ function loginPage() {
     );
 }
 
-export default loginPage;
+export default cadastroUsuarioPage;
