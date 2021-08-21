@@ -51,7 +51,7 @@ export default function HomeComponent() {
     }, [])
 
     const columns = [
-        { name: "id", label: "CPF" },
+        { name: "id", label: "ID" },
         { name: "nome", label: "Nome" },
         { name: "descricao", label: "Descrição" },
        
