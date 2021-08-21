@@ -7,6 +7,7 @@ import CadastroPage          from "./pages/CadastroPage"
 import LoginPage             from "./pages/LoginPage"
 import cadastroUsuarioPage   from "./pages/cadastroUsuarioPage"
 import DadosPessoaisPage   from "./pages/DadosPessoaisPage"
+import EnderecoPage        from "./pages/EnderecoPage"
 
 const Routes = ()=>(
     <BrowserRouter>
@@ -14,6 +15,7 @@ const Routes = ()=>(
             <Route exact path="/portal/home" component={HomePage} />
             <Route exact path="/portal/admin" component={AdminPage} />
             <Route exact path="/portal/cadastro" component={CadastroPage} />
+            <Route exact path="/portal/endereco" component={EnderecoPage} />
             <Route exact path="/portal/login" component={LoginPage} />
             <Route exact path="/portal/dados" component={DadosPessoaisPage} />
             <Route exact path="/portal/cadastroUsuario" component={cadastroUsuarioPage} />
