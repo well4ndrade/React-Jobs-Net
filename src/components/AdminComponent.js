@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function HomeComponent() {
+export default function AdminComponent() {
     const classes = useStyles()
     const [dadosVagas, setVagas] = useState([]);
     const [carregando, setCarregando] = useState('');
