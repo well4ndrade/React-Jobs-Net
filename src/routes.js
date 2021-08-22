@@ -17,7 +17,7 @@ const Routes = ()=>(
             <Route exact path="/portal/cadastro" component={CadastroPage} />
             <Route exact path="/portal/endereco" component={EnderecoPage} />
             <Route exact path="/portal/login" component={LoginPage} />
-            <Route exact path="/portal/dados" component={DadosPessoaisPage} />
+            <Route exact path="/portal/dadosp" component={DadosPessoaisPage} />
             <Route exact path="/portal/cadastroUsuario" component={cadastroUsuarioPage} />
             <Route path="*"> <Redirect to="/portal/login" /> </Route>
         </Switch>

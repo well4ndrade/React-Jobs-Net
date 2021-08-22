@@ -1,27 +1,26 @@
 import { makeStyles } from '@material-ui/core/styles';
-import Input from '@material-ui/core/Input';
-import InputLabel from '@material-ui/core/InputLabel';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import FormControl from '@material-ui/core/FormControl';
 import Grid from '@material-ui/core/Grid';
-import AccountCircle from '@material-ui/icons/AccountCircle';
-import MenuItem from '@material-ui/core/MenuItem';
+import FaceIcon from '@material-ui/icons/Face';
+import DriveEtaIcon from '@material-ui/icons/DriveEta';
 import Typography from '@material-ui/core/Typography';
+import SettingsPhoneIcon from '@material-ui/icons/SettingsPhone';
+import DateRangeIcon from '@material-ui/icons/DateRange';
+import WcIcon from '@material-ui/icons/Wc';
 import React, { useState, useEffect } from 'react';
+import AssignmentIcon from '@material-ui/icons/Assignment';
 import api from '../services/apiService';
 import logo from '../imagens/192.png' // relative path to image 
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import Paper from '@material-ui/core/Paper';
-import { CenterFocusWeakTwoTone } from '@material-ui/icons';
-
+import EmailIcon from '@material-ui/icons/Email';
+import SettingsCellIcon from '@material-ui/icons/SettingsCell';
 
 const useStyles = makeStyles(theme => ({
   root: {
     '& .MuiTextField-root': {
       margin: theme.spacing(1),
-      width: '30ch',
+      width: '40ch',
       height: '8ch',
       textalign: 'center'
   },
@@ -119,7 +118,7 @@ const generos = [
       setPossuiHabilitacao(response);
       localStorage.setItem("@nome", possuiHabilitacao)
       localStorage.clear();
-      Window.location.href = '/portal/dados'
+      Window.location.href = '/portal/dadosp'
    } catch (err) {
                 setError("Houve um problema.");
             }
@@ -137,6 +136,7 @@ const generos = [
         style={{ minHeight: '180vh' }}
     >
       <CssBaseline />
+      
             <Grid
                 item
                 className={classes.form}
@@ -147,17 +147,19 @@ const generos = [
             >   <Grid
                 imagem
                 className={classes.imagem}>
-                <img src={logo} alt={"logo"}/> 
+                <img src={logo} alt={"logo"} Align= 'center'/> 
                 
                 </Grid>
-                <strong><Typography variant="h5" component="h5" gutterBottom>
+                <strong><Typography variant="h4" component="h5" textAlign= 'center'>
                 
-                    Cadastrando Dados
+                        Cadastrar Dados
                     </Typography> </strong>
+
+                    <div><br></br></div>
+                    
                 <form className={classes.form} onSubmit={handleCaptura} >
-                <TextField
-                        
-                       
+                
+                <FaceIcon /><TextField
                         required
                         id="nome"
                         label="Nome Completo"
@@ -165,9 +167,7 @@ const generos = [
                         onChange={(e)=> setNome(e.target.value)}
                      
                     />
-                 <TextField
-                        
-                        
+                 <AssignmentIcon/><TextField
                         required
                         id="rg"
                         label="RG"
@@ -175,9 +175,7 @@ const generos = [
                         onChange={(e)=> setRg(e.target.value)}
                         className={classes.input}
                     />
-                  <TextField
-                        
-                        
+                  <AssignmentIcon/><TextField
                         required
                         id="cpf"
                         label="CPF"
@@ -185,7 +183,7 @@ const generos = [
                         onChange={(e) => setCpf(e.target.value)}
                         className={classes.input}
                     />
-                  <TextField
+                  <WcIcon/><TextField
                         id="standard-select-estadocivi-native"
                         select
                         label="Gênero"
@@ -201,9 +199,7 @@ const generos = [
                           </option>
                         ))}
                   </TextField>
-                  <TextField
-                        
-                        
+                  <DateRangeIcon/><TextField
                         required
                         id="nascimento"
                         label="Data Nascimento"
@@ -211,9 +207,7 @@ const generos = [
                         onChange={(e) => setNascimento(e.target.value)}
                         className={classes.input}
                     />
-                  <TextField
-                        
-                        
+                  <SettingsCellIcon/><TextField
                         required
                         id="celular"
                         label="Celular"
@@ -221,16 +215,14 @@ const generos = [
                         onChange={(e) => setTelefone(e.target.value)}
                         className={classes.input}
                     />
-                  <TextField
-                        
-                        
+                 <SettingsPhoneIcon/><TextField
                         id="telefone"
                         label="Telefone"
                         name="telefone"
                         onChange={(e) => setTelefone2(e.target.value)}
                         className={classes.input}
                     />
-                  <TextField
+                  <AssignmentIcon/><TextField
                         id="standard-select-genero-native"
                         select
                         label="Estado Civil"
@@ -246,9 +238,7 @@ const generos = [
                           </option>
                         ))}
                     </TextField>
-                    <TextField
-                        
-                        
+                    <EmailIcon/><TextField
                         required
                         id="email"
                         label="E-mail"
@@ -256,9 +246,7 @@ const generos = [
                         onChange={(e) => setEmail(e.target.value)}
                         className={classes.input}
                     />
-                    <TextField
-                        
-                        
+                    <DriveEtaIcon/><TextField
                         required
                         id="veiculo"
                         label="Possui Veículo?"
@@ -266,9 +254,7 @@ const generos = [
                         onChange={(e) => setPossuiVeiculo(e.target.value)}
                         className={classes.input}
                     />
-                    <TextField
-                        
-                        
+                    <AssignmentIcon/><TextField
                         required
                         id="habilitação"
                         label="Possui Habilitação?"
@@ -279,11 +265,9 @@ const generos = [
                     <Grid>
                     <a href='/portal/endereco'>
                   <Button
-                     
                         fullWidth
                         variant="contained"
                         color="primary"
-                      
                     >
                     AVANÇAR
                     </Button></a>
