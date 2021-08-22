@@ -246,3 +246,4 @@ const generos = [
     </Paper>
   );
 }
+
