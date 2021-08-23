@@ -1,15 +1,14 @@
 import React from 'react';
 
-import AcessoSistema from '../components/loginComponent.js'
+import AcessoSistema from '../components/recuperarSenhaComponent.js'
 import './login.css';
 
-function loginPage() {
+function recuperarSenhaPage() {
     return (
         <div className="login" >
             <AcessoSistema > </AcessoSistema>
-                        
         </div>
     );
 }
 
-export default loginPage;
+export default recuperarSenhaPage;

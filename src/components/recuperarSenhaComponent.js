@@ -14,13 +14,13 @@ const useStyles = makeStyles(theme => ({
         height: '100vh',
         background: 'rgb(2,0,36)',
         background: 'linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(20,71,124,1) 35%, rgba(0,212,255,1) 100%)',
-        justifyContent: 'center',
     },
     paper: {
         margin: theme.spacing(8, 8),
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
+        justify: "center",
         alignItems: "center"
     },
     input: {
@@ -51,19 +51,17 @@ const useStyles = makeStyles(theme => ({
         backgroundColor: '#000000',
         opacity: '0.81'
     },
-    submit2: {
-        margin: theme.spacing(1, 1, 2),
-        width: '40%',
-        backgroundColor: '#000000',
-        opacity: '0.81'
+     imagem: {
+        width: '50%',
+        height: '30%',
     },
-  
 }));
 
 export default function AcessoSistema() {
     const classes = useStyles();
     const [Login, setLogin] = useState('');
     const [Passwd, setPasswd] = useState('');
+    const [PasswdConfirm, setPasswdConfirm] = useState('');
     const [error, setError] = useState('');
     
 
@@ -73,31 +71,32 @@ export default function AcessoSistema() {
         e.preventDefault();
         localStorage.clear();
 
-        if (Login === '' || Passwd === '') {
+        if (Login === '' || Passwd === '' || PasswdConfirm === '') {
             setError('Preencha o usuario e a senha para continuar.')
-        } else {
+        } else { 
+            if(Passwd === PasswdConfirm){
             setError('')
             try {
-                axios.post("/Dados/Login", {
+                axios.put("/Dados/Alterar", {
                     Login,
                     Passwd
                 }).then(function(response) {
-                    console.log('Autorizado');
-                    localStorage.setItem('@login', Login)
-                    window.location.href = "/portal/home";
+                    console.log('Atualizado');
+                    window.location.href = "/portal/login";
 
                 }).catch(function (error) {
-                    console.log('Não Autorizado');
-                    setError("Houve um problema com o login, verifique suas credenciais ou click em recuperar sua senha.");
-                    
+                    console.log('Usuario não encontrado');
+                    setError("Esse usuario não foi encontrado, retorne para a pagina inicial e crie um novo login");
                 });
             } catch (error) {
-                setError("Houve um problema com o login, verifique suas credenciais ou entre em contato com o T.I.");
+                setError("");
             }
         }
-    } 
-            
+        setError("As senhas não conferem.");
 
+    }
+} 
+        
     return (
 
         <Grid container
@@ -106,8 +105,8 @@ export default function AcessoSistema() {
             spacing={0}
             direction="column"
             alignItems="center"
-            justifyContent="center"
-            style={{ minHeight: '100' }}
+            justify="top"
+            style={{ minHeight: '180vh' }}
         >
             <CssBaseline />
             <Grid
@@ -117,22 +116,23 @@ export default function AcessoSistema() {
                 lg-offset={5}
                 component={Paper}
                 elevation={6}
-            >   <Grid           
+            >   <Grid
+                imagem
                 className={classes.imagem}>
                 <img src={logo} alt={"logo"}/> 
                 </Grid>
                 <Typography variant="h3" component="h2" gutterBottom>
                 
-                    JobsNet
+                    Recuperando Senha
                 </Typography>
                 <form className={classes.form} onSubmit={handleSignIn} autoComplete="off">
                     <TextField
                         autoComplete="off"
                         variant="filled"
                         required
-                        id="Login"
+                        id="login"
                         label="Login"
-                        name="Login"
+                        name="login"
                         onChange={e => setLogin(e.target.value)}
                         className={classes.input}
                     />
@@ -141,12 +141,24 @@ export default function AcessoSistema() {
                         variant="filled"
                         required
                         name="password"
-                        label="Senha"
+                        label="Senha (Max = 8 digitos)"
                         type="password"
                         id="password"
                         autoComplete="off"
                         onChange={(e) => setPasswd(e.target.value)}
                     />
+                    <TextField
+                        className={classes.input}
+                        variant="filled"
+                        required
+                        name="passwordConfirm"
+                        label="Confirme a Senha"
+                        type="password"
+                        id="passwordConfirm"
+                        autoComplete="off"
+                        onChange={(e) => setPasswdConfirm(e.target.value)}
+                    />
+
                     <Button
                         type="submit"
                         fullWidth
@@ -154,31 +166,20 @@ export default function AcessoSistema() {
                         color="primary"
                         className={classes.submit}
                     >
-                        Logar
+                        Alterar Senha
                     </Button>
                     <Button
                        variant="contained" 
                        color="primary" 
-                       href="/portal/CadastroUsuario"
+                       href="/portal/login"
                        className={classes.submit}
                         
                     >
-                        Cadastrar
+                        Retornar
                     </Button>
-                    <Button
-                       variant="contained" 
-                       color="primary" 
-                       href="/portal/recuperar"
-                       className={classes.submit2}
-                        
-                    >
-                        Recuperar Senha
-                    </Button>
-
                     {error && <p>{error}</p>}
                     <Grid container>
                         <Grid item xs>
-
                         </Grid>
                     </Grid>
                 </form>

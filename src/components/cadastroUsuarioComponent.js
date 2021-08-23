@@ -8,6 +8,7 @@ import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
+import axios from "axios";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -59,10 +60,10 @@ const useStyles = makeStyles(theme => ({
 
 export default function AcessoSistema() {
     const classes = useStyles();
-    const [login, setLogin] = useState('');
-    const [passwd, setPasswd] = useState('');
+    const [Login, setLogin] = useState('');
+    const [Passwd, setPasswd] = useState('');
+    const [PasswdConfirm, setPasswdConfirm] = useState('');
     const [error, setError] = useState('');
-    const [passwdConfirm, setPasswdConfirm] = useState('');
     
 
     useEffect(() => { console.log("Deu erro") }, [error])
@@ -71,26 +72,32 @@ export default function AcessoSistema() {
         e.preventDefault();
         localStorage.clear();
 
-        if (login === '' || passwd === '') {
+        if (Login === '' || Passwd === '' || PasswdConfirm === '') {
             setError('Preencha o usuario e a senha para continuar.')
-        } else {
+        } else { 
+            if(Passwd === PasswdConfirm){
             setError('')
             try {
-                const { data: response } = await api.post("/login", {
-                    login,
-                    passwd
-                });
-                setLogin(response);
-                localStorage.clear();
-                localStorage.setItem('@usuario', login)
-                window.location.href = '/portal/home'
+                axios.post("/Dados/", {
+                    Login,
+                    Passwd
+                }).then(function(response) {
+                    console.log('Cadastrado');
+                    window.location.href = "/portal/login";
 
-            } catch (err) {
-                setError("Houve um problema com o login, verifique suas credenciais ou entre em contato com o T.I.");
+                }).catch(function (error) {
+                    console.log('Usuario já existe');
+                    setError("Esse usuario já se encontra cadastrado, Altere sua senha ou entre em contato com o T.I.");
+                });
+            } catch (error) {
+                setError("Esse usuario já se encontra cadastrado, Altere sua senha ou entre em contato com o T.I.");
             }
         }
-    }
+        setError("As senhas não conferem.");
 
+    }
+} 
+        
     return (
 
         <Grid container
@@ -100,7 +107,7 @@ export default function AcessoSistema() {
             direction="column"
             alignItems="center"
             justify="top"
-            style={{ minHeight: '180vh' }}
+            style={{ minHeight: '140' }}
         >
             <CssBaseline />
             <Grid
@@ -162,6 +169,15 @@ export default function AcessoSistema() {
                     >
                         Criar Cadastro
                     </Button>
+                    <Button
+                       variant="contained" 
+                       color="primary" 
+                       href="/portal/login"
+                       className={classes.submit}
+                        
+                    >
+                        Retornar
+                    </Button>
                     {error && <p>{error}</p>}
                     <Grid container>
                         <Grid item xs>
@@ -171,5 +187,6 @@ export default function AcessoSistema() {
             </Grid>
 
         </Grid>
+        
     );
 }
