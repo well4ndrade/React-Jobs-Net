@@ -8,7 +8,6 @@ import DateRangeIcon from '@material-ui/icons/DateRange';
 import WcIcon from '@material-ui/icons/Wc';
 import React, { useState, useEffect } from 'react';
 import AssignmentIcon from '@material-ui/icons/Assignment';
-import api from '../services/apiService';
 import logo from '../imagens/192.png' // relative path to image 
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -20,10 +19,12 @@ const useStyles = makeStyles(theme => ({
   root: {
     '& .MuiTextField-root': {
       margin: theme.spacing(1),
-      width: '40ch',
+      width: '30ch',
       height: '8ch',
-      textalign: 'center'
-  },
+      textalign: 'center',
+      marginleft: 'auto',
+      marginright: 'auto',
+},
 }}));
 
 const generos = [
@@ -69,61 +70,20 @@ const generos = [
         setestadocivi(event.target.value);
     };
 
+    localStorage.setItem('@nome', nome)
+    localStorage.setItem('@cpf', cpf)
+    localStorage.setItem('@rg', rg)
+    localStorage.setItem('@genero', genero)
+    localStorage.setItem('@nascimento', nascimento)
+    localStorage.setItem('@telefone', telefone)
+    localStorage.setItem('@telefone2', telefone2)
+    localStorage.setItem('@email', email)
+    localStorage.setItem('@profissao', profissao)
+    localStorage.setItem('@estadocivi', estadocivi)
+    localStorage.setItem('@possuiVeiculo', possuiVeiculo)
+    localStorage.setItem('@possuiHabilitacao', possuiHabilitacao)
 
-    async function handleCaptura(e) {
-      e.preventDefault();
-      localStorage.clear();
 
-      if (cpf === '' || rg === '') {
-        setError('Preencha o CPF e a RG para continuar.')
-      } else {
-        setError('')
-          try {
-          const { data: response } = await api.post("/endereco", {
-          nome,
-          cpf, 
-          rg,
-          nascimento,
-          telefone,
-          telefone2,
-          email,
-          profissao,
-          possuiVeiculo,
-          possuiHabilitacao,
-          genero,
-          estadocivi
-    }); 
-      setNome(response);
-      localStorage.setItem("@nome", nome)
-      setCpf(response);
-      localStorage.setItem("@nome", cpf)
-      setRg(response);
-      localStorage.setItem("@nome", rg)
-      setgenero(response);
-      localStorage.setItem("@nome", genero)
-      setNascimento(response);
-      localStorage.setItem("@nome", nascimento)
-      setTelefone(response);
-      localStorage.setItem("@nome", telefone)
-      setTelefone2(response);
-      localStorage.setItem("@nome", telefone2)
-      setEmail(response);
-      localStorage.setItem("@nome", email)
-      setProfissao(response);
-      localStorage.setItem("@nome", profissao)
-      setestadocivi(response);
-      localStorage.setItem("@nome", estadocivi)
-      setPossuiVeiculo(response);
-      localStorage.setItem("@nome", possuiVeiculo)
-      setPossuiHabilitacao(response);
-      localStorage.setItem("@nome", possuiHabilitacao)
-      localStorage.clear();
-      Window.location.href = '/portal/dadosp'
-   } catch (err) {
-                setError("Houve um problema.");
-            }
-        }
-    }
   return (
 
     <Grid container
@@ -144,20 +104,20 @@ const generos = [
                 component={'Form'}
                 elevation={6}
                 textAlign= 'center'
-            >   <Grid
+            >   <Grid 
                 imagem
                 className={classes.imagem}>
-                <img src={logo} alt={"logo"} Align= 'center'/> 
+                <img class="displayed" src={logo} alt={"logo"} /> 
                 
                 </Grid>
-                <strong><Typography variant="h4" component="h5" textAlign= 'center'>
+                <Typography variant="h4" component="h5">
                 
                         Cadastrar Dados
-                    </Typography> </strong>
+                    </Typography>
 
                     <div><br></br></div>
                     
-                <form className={classes.form} onSubmit={handleCaptura} >
+                <form className={classes.form} >
                 
                 <FaceIcon /><TextField
                         required
@@ -244,6 +204,14 @@ const generos = [
                         label="E-mail"
                         name="email"
                         onChange={(e) => setEmail(e.target.value)}
+                        className={classes.input}
+                    />
+                     <EmailIcon/><TextField
+                        required
+                        id="profissao"
+                        label="Profissão"
+                        name="profissao"
+                        onChange={(e) => setProfissao(e.target.value)}
                         className={classes.input}
                     />
                     <DriveEtaIcon/><TextField
