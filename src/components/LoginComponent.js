@@ -14,6 +14,7 @@ const useStyles = makeStyles(theme => ({
         height: '100vh',
         background: 'rgb(2,0,36)',
         background: 'linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(20,71,124,1) 35%, rgba(0,212,255,1) 100%)',
+        justifyContent: 'center',
     },
     paper: {
         margin: theme.spacing(8, 8),
@@ -106,7 +107,7 @@ export default function AcessoSistema() {
             direction="column"
             alignItems="center"
             justifyContent="center"
-            style={{ minHeight: '180vh' }}
+            style={{ minHeight: '100' }}
         >
             <CssBaseline />
             <Grid

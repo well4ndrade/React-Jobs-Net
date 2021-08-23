@@ -107,7 +107,7 @@ export default function AcessoSistema() {
             direction="column"
             alignItems="center"
             justify="top"
-            style={{ minHeight: '180vh' }}
+            style={{ minHeight: '140' }}
         >
             <CssBaseline />
             <Grid
@@ -187,5 +187,6 @@ export default function AcessoSistema() {
             </Grid>
 
         </Grid>
+        
     );
 }
