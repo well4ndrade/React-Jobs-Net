@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
       flexGrow: 1,
   },
   paper: {
-      padding: theme.spacing(2),
+      padding: theme.spacing(1),
       textAlign: 'center',
       color: theme.palette.text.secondary,
   botao: {
@@ -117,42 +117,51 @@ const generos = [
 
         <Grid container xs={12} spacing={1}>
         <Grid container xs={12} spacing={1}>
-          <Grid item xs={6}  imagem className={classes.imagem}>
+          <Grid item xs={12}  imagem className={classes.imagem}>
             <img class="displayed" src={logo} alt={"logo"} /> 
           </Grid>
         </Grid>  
+
         <Grid container xs={12} spacing={1}> 
+          <Grid  item xs={12}>
           <Typography variant="h4" component="h5">
-          Cadastrar Dados
+            Cadastrar Dados
           </Typography>
+          </Grid>
         </Grid>
-                    
-                
-                
-                <FaceIcon /><TextField
-                        required
-                        id="nome"
-                        label="Nome Completo"
-                        name="nome"
-                        onChange={(e)=> setNome(e.target.value)}
-                     
-                    />
-                 <AssignmentIcon/><TextField
-                        required
-                        id="rg"
-                        label="RG"
-                        name="rg"
-                        onChange={(e)=> setRg(e.target.value)}
-                        className={classes.input}
-                    />
-                  <AssignmentIcon/><TextField
-                        required
-                        id="cpf"
-                        label="CPF"
-                        name="cpf"
-                        onChange={(e) => setCpf(e.target.value)}
-                        className={classes.input}
-                    />
+
+        <Grid container xs={12} spacing={1}>  
+          <Grid  item xs={12}>        
+            <FaceIcon /><TextField
+              required
+              id="nome"
+              label="Nome Completo"
+              name="nome"
+              onChange={(e)=> setNome(e.target.value)}/> 
+          </Grid>
+        </Grid>
+
+        <Grid container xs={12} spacing={1}> 
+          <Grid  item xs={6}>  
+            <AssignmentIcon/><TextField
+              required
+              id="rg"
+              label="RG"
+              name="rg"
+              onChange={(e)=> setRg(e.target.value)}
+              className={classes.input}/>
+          </Grid>
+          <Grid  item xs={6}>  
+              <AssignmentIcon/><TextField
+                required
+                id="cpf"
+                label="CPF"
+                name="cpf"
+                onChange={(e) => setCpf(e.target.value)}
+                className={classes.input}/>
+          </Grid>
+        </Grid>
+
                   <WcIcon/><TextField
                         id="standard-select-estadocivi-native"
                         select
