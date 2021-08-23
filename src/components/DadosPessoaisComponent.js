@@ -14,18 +14,38 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import EmailIcon from '@material-ui/icons/Email';
 import SettingsCellIcon from '@material-ui/icons/SettingsCell';
+import Paper from "@material-ui/core/Paper";
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    '& .MuiTextField-root': {
-      margin: theme.spacing(1),
-      width: '30ch',
-      height: '8ch',
-      textalign: 'center',
-      marginleft: 'auto',
-      marginright: 'auto',
-},
-}}));
+const useStyles = makeStyles((theme) => ({
+  root:
+  {
+      flexGrow: 1,
+  },
+  paper: {
+      padding: theme.spacing(1),
+      textAlign: 'center',
+      color: theme.palette.text.secondary,
+  botao: {
+      flexGrow: 1,
+      itemAlign: 'center',
+  },
+  },
+  textField: {
+      width: '100%',
+      height: '100%',
+      marginLeft: 'auto',
+      marginRight: 'auto',
+      paddingBottom: 0,
+      marginTop: 0,
+      fontWeight: 500
+  }
+  ,
+  imagem: {
+    itemAlign: 'center',
+  }
+  
+}));
+
 
 const generos = [
     {label: 'Selecionar',},
@@ -57,7 +77,8 @@ const generos = [
     const [possuiHabilitacao, setPossuiHabilitacao] = useState('');
     const [error, setError] = useState('');
   
-    useEffect(() => { console.log("Deu erro") }, [error])
+    useEffect(() => { console.log("Deu erro") }, [error]
+    )
    
 
     
@@ -86,63 +107,61 @@ const generos = [
 
   return (
 
-    <Grid container
-        component="main"
-        className={classes.root}
-        spacing={0}
-        direction="column"
-        alignItems="center"
-        justify="top"
-        style={{ minHeight: '180vh' }}
-    >
-      <CssBaseline />
-      
-            <Grid
-                item
-                className={classes.form}
-                xs={12} sm={2} md={2} lg={2}
-                component={'Form'}
-                elevation={6}
-                textAlign= 'center'
-            >   <Grid 
-                imagem
-                className={classes.imagem}>
-                <img class="displayed" src={logo} alt={"logo"} /> 
-                
-                </Grid>
-                <Typography variant="h4" component="h5">
-                
-                        Cadastrar Dados
-                    </Typography>
+    <form
+    id="form"
+    name="form"
+    className={classes.root}
+    noValidate
+    autoComplete="off">
+      <Paper className={classes.paper}>
 
-                    <div><br></br></div>
-                    
-                <form className={classes.form} >
-                
-                <FaceIcon /><TextField
-                        required
-                        id="nome"
-                        label="Nome Completo"
-                        name="nome"
-                        onChange={(e)=> setNome(e.target.value)}
-                     
-                    />
-                 <AssignmentIcon/><TextField
-                        required
-                        id="rg"
-                        label="RG"
-                        name="rg"
-                        onChange={(e)=> setRg(e.target.value)}
-                        className={classes.input}
-                    />
-                  <AssignmentIcon/><TextField
-                        required
-                        id="cpf"
-                        label="CPF"
-                        name="cpf"
-                        onChange={(e) => setCpf(e.target.value)}
-                        className={classes.input}
-                    />
+        <Grid container xs={12} spacing={1}>
+        <Grid container xs={12} spacing={1}>
+          <Grid item xs={12}  imagem className={classes.imagem}>
+            <img class="displayed" src={logo} alt={"logo"} /> 
+          </Grid>
+        </Grid>  
+
+        <Grid container xs={12} spacing={1}> 
+          <Grid  item xs={12}>
+          <Typography variant="h4" component="h5">
+            Cadastrar Dados
+          </Typography>
+          </Grid>
+        </Grid>
+
+        <Grid container xs={12} spacing={1}>  
+          <Grid  item xs={12}>        
+            <FaceIcon /><TextField
+              required
+              id="nome"
+              label="Nome Completo"
+              name="nome"
+              onChange={(e)=> setNome(e.target.value)}/> 
+          </Grid>
+        </Grid>
+
+        <Grid container xs={12} spacing={1}> 
+          <Grid  item xs={6}>  
+            <AssignmentIcon/><TextField
+              required
+              id="rg"
+              label="RG"
+              name="rg"
+              onChange={(e)=> setRg(e.target.value)}
+              className={classes.input}/>
+          </Grid>
+          <Grid  item xs={6}>  
+              <AssignmentIcon/><TextField
+                required
+                id="cpf"
+                label="CPF"
+                name="cpf"
+                onChange={(e) => setCpf(e.target.value)}
+                className={classes.input}/>
+          </Grid>
+        </Grid>
+
                   <WcIcon/><TextField
                         id="standard-select-estadocivi-native"
                         select
@@ -244,10 +263,12 @@ const generos = [
                         <Grid item xs>
                         </Grid>
                     </Grid>
-                </form>
-            </Grid>
+                
+           
 
         </Grid>
+        </Paper>
+      </form >
     );
  }
 
@@ -255,4 +276,4 @@ const generos = [
                     
 
 
-   
+
