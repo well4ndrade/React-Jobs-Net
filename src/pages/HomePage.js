@@ -1,13 +1,13 @@
 import React from 'react';
 import Container from '@material-ui/core/Box';
-import NavBar from '../components/navBarComponent.js';
+import MiniDrawer from '../components/MenuComponent.js';
 
 import HomeComponent from '../components/HomeComponent.js';
 export default function HomePage() {
   return (
     <div >
       <Container  >
-        <NavBar  text={<HomeComponent />} />
+        <MiniDrawer  corpo={<HomeComponent />} />
       </Container>
     </div>
   );

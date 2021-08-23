@@ -1,12 +1,12 @@
 import React from 'react';
 import Container from '@material-ui/core/Box';
-import NavBar from '../components/navBarComponent.js';
+import MiniDrawer from '../components/MenuComponent.js';
 import DadosPessoaisComponent from '../components/DadosPessoaisComponent.js';
 export default function DadosPessoaisPage() {
   return (
     <div >
       <Container  >
-        <NavBar  text={<DadosPessoaisComponent />} />
+      <MiniDrawer  corpo={<DadosPessoaisComponent />} />
       </Container>
     </div>
   );

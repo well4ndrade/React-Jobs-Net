@@ -21,6 +21,7 @@ import PropTypes from 'prop-types';
 import HomeIcon from '@material-ui/icons/Home';
 import ExitToApp from '@material-ui/icons/ExitToApp';
 import PersonIcon from '@material-ui/icons/Person';
+import Link from '@material-ui/core/Link';
 
 const drawerWidth = 240;
 
@@ -99,6 +100,11 @@ export default function MiniDrawer(props) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const usuario = localStorage.getItem("@login");
+  
+  function logout() {
+    localStorage.clear();
+    window.location.href = "/";
+  }
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -172,12 +178,15 @@ export default function MiniDrawer(props) {
         </List>
         <Divider />
         <List>
+          <Link style={{ color: '#ffffff' }} onClick={() => logout()}>
           {[ 'Sair'].map((text, index) => (
             <ListItem button key={text}>
               <ListItemIcon>{index % 2 === 0 ? <ExitToApp /> : <ExitToApp />}</ListItemIcon>
               <ListItemText primary={text} />
             </ListItem>
+          
           ))}
+          </Link>  
     </List>
       </Drawer>
       <main className={classes.content}>
