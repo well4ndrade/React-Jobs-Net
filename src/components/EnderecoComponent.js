@@ -1,13 +1,19 @@
 import React from 'react';
 import { Formik, Field, Form } from 'formik';
+import './EnderecoComponent.css';
 import Grid from '@material-ui/core/Grid';
 import Paper from "@material-ui/core/Paper";
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import Button from "@material-ui/core/Button";
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-
-
+import LocationOnIcon from '@material-ui/icons/LocationOn';
+import LocationCityIcon from '@material-ui/icons/LocationCity';
+import MyLocationIcon from '@material-ui/icons/MyLocation';
+import Filter5Icon from '@material-ui/icons/Filter5';
+import LocalLibraryIcon from '@material-ui/icons/LocalLibrary';
+import PinDropIcon from '@material-ui/icons/PinDrop';
+import StreetviewIcon from '@material-ui/icons/Streetview';
 
 function App() {
     function onSubmit(values, actions) {
@@ -66,49 +72,50 @@ function App() {
             
 
             <Paper className={classes.paper}>
+           
                
-            <Grid  container  item xs={12}>
-                 <Grid   item xs={4} spacing={1}> 
-                  <label>Cep: </label>
-                  <Field name="cep" type="text" onBlur={(ev) => onBlurCep(ev, setFieldValue)} /> 00000-000
+            <Grid  container  item xs={12} className="Form">
+                 <h2>Endereço</h2>
+                <p>
+                  <LocationOnIcon></LocationOnIcon>
+                  <Field name="cep" type="text" placeHolder="Cep 00000-000" className="Inputs" onBlur={(ev) => onBlurCep(ev, setFieldValue)} />
+                </p>
+                  <p>
+                  <MyLocationIcon></MyLocationIcon>
+                  <Field name="logradouro" placeHolder="Logradouro" className="Inputs" type="text" />  
+                 </p>
+                <p>
+                <Filter5Icon></Filter5Icon>
+                  <Field name="numero" placeHolder="Nº" className="Inputs" type="text" />
+                 </p>
+                 <p>
+                <PinDropIcon></PinDropIcon>
+                 <Field name="complemento" placeHolder="Complemento" className="Inputs" type="text" />
+                 </p>
+                 <p>
+                <StreetviewIcon></StreetviewIcon>
+                 <Field name="bairro" placeHolder="Bairro" className="Inputs" type="text" />
+                 </p>
+                 <p>
+                <LocationCityIcon></LocationCityIcon>
+                 <Field name="cidade" placeHolder="Cidade"  className="Inputs" type="text" />
+                </p>
+                 <p>
+                <LocalLibraryIcon></LocalLibraryIcon>
+                 <Field name="uf" placeHolder="Estado" className="Inputs" type="text" />
+                 </p>
+                <Grid>
+                <Button
+                    width="20%"
+                    display="inherit"
+                    type="submit"
+                    variant="contained"
+                    color="primary"
+                    fullWidth={true}>
+                    Concluir Cadastro
+                 </Button>
                  </Grid>
 
-                  <Grid  item xs={4} spacing={1}> 
-                   <label>Logradouro: </label>
-                   <Field name="logradouro" type="text" />  
-                 </Grid>
-
-                 <Grid   item xs={4} spacing={1}> 
-                   <label>Número: </label>
-                   <Field name="numero" type="text" />
-                 </Grid>
-
-                 <Grid   item xs={4} spacing={1}> 
-                   <label>Complemento: </label>
-                   <Field name="complemento" type="text" />
-                 </Grid>
-
-                 <Grid   item xs={4} spacing={1}> 
-                   <label>Bairro: </label>
-                   <Field name="bairro" type="text" />
-                 </Grid>
-                 
-                 <Grid   item xs={4} spacing={1}> 
-                   <label>Cidade: </label>
-                   <Field name="cidade" type="text" />
-                 </Grid>
-
-                  <Grid   item xs={4} spacing={1}> 
-                   <label>Estado: </label>
-                   <Field name="estado" type="text" />
-                 </Grid>
-          <Button
-              type="submit"
-              variant="contained"
-              color="primary"
-              fullWidth={true}>
-              Concluir Cadastro
-          </Button>
             </Grid>
       
     
