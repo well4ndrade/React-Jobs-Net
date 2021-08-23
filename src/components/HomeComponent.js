@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import axios from "axios";
 import Paper from "@material-ui/core/Paper";
 import MUIDataTable from "mui-datatables";
 import LinearProgress from '@material-ui/core/LinearProgress';
+import api from '../services/apiService';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -21,9 +21,8 @@ export default function HomeComponent() {
         try {
 
             // ------------------------------------------------------------------
-            axios.get('/Vagas').then(function (response) {
+            api.get('/Vagas').then(function (response) {
                 console.log(response);
-
                 setVagas(response.data)
                 setCarregando(false)
 
@@ -45,7 +44,7 @@ export default function HomeComponent() {
         }
     }
     useEffect(() => {
-        localStorage.setItem('@nome', 'ARTHUR')
+        
         listaVagas()
     }, [])
 
@@ -53,7 +52,7 @@ export default function HomeComponent() {
         { name: "id", label: "ID" },
         { name: "nome", label: "Nome" },
         { name: "descricao", label: "Descrição" },
-       
+               
     ];
 
     const options = {

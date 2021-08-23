@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import axios from "axios";
 import Paper from "@material-ui/core/Paper";
 import TextField from '@material-ui/core/TextField';
 import Button from "@material-ui/core/Button";
 import { Grid } from '@material-ui/core';
+import api from '../services/apiService';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -40,7 +40,7 @@ export default function CadastroComponent() {
     async function cadastraVagas(e) {
         e.preventDefault();
         try {
-            axios.post('https://localhost:5001/Vagas',{
+            api.post('/Vagas',{
                 nome: nome,
                 descricao: descricao
               }).then(function(response) {
@@ -48,7 +48,7 @@ export default function CadastroComponent() {
                 setRetorno(response.data)
               
 
-                window.location.href = "portal/home";
+                window.location.href = "http://localhost:3000/portal/home";
 
 
             }).catch(function (error) {

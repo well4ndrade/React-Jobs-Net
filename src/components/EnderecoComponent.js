@@ -33,23 +33,22 @@ function App() {
   }
   
   const useStyles = makeStyles((theme) => ({
-    root: {
-      '& .MuiTextField-root': {
-        margin: theme.spacing(1),
-        width: '250ch',
-             },
+      root: {
+        flexGrow: 1,
+      },
       paper: {
+        width:'100000000000px',
         padding: theme.spacing(2),
         textAlign: 'center',
         color: theme.palette.text.secondary,
-        
-    },
-    },
+      },
+   
   }));
+
   const classes = useStyles();
 
   return (
-    <div className="App">
+    <div  className={classes.root}>
       <Formik
         onSubmit={onSubmit}
         validateOnMount
@@ -64,6 +63,7 @@ function App() {
         }}
         render={({ isValid, setFieldValue }) => (
             
+
             <Paper className={classes.paper}>
                
             <Grid  container  item xs={12}>
@@ -84,6 +84,7 @@ function App() {
                  </Grid>
         
             </Grid>
+      
     
             </Paper>
         

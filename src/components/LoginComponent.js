@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import api from '../services/apiService';
 import logo from '../imagens/192.png' // relative path to image 
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
@@ -8,6 +7,7 @@ import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
+import axios from "axios";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -20,7 +20,6 @@ const useStyles = makeStyles(theme => ({
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
-        justify: "center",
         alignItems: "center"
     },
     input: {
@@ -51,17 +50,21 @@ const useStyles = makeStyles(theme => ({
         backgroundColor: '#000000',
         opacity: '0.81'
     },
-     imagem: {
-        width: '50%',
-        height: '30%',
+    submit2: {
+        margin: theme.spacing(1, 1, 2),
+        width: '40%',
+        backgroundColor: '#000000',
+        opacity: '0.81'
     },
+  
 }));
 
 export default function AcessoSistema() {
     const classes = useStyles();
-    const [login, setLogin] = useState('');
-    const [passwd, setPasswd] = useState('');
+    const [Login, setLogin] = useState('');
+    const [Passwd, setPasswd] = useState('');
     const [error, setError] = useState('');
+    
 
     useEffect(() => { console.log("Deu erro") }, [error])
 
@@ -69,25 +72,30 @@ export default function AcessoSistema() {
         e.preventDefault();
         localStorage.clear();
 
-        if (login === '' || passwd === '') {
+        if (Login === '' || Passwd === '') {
             setError('Preencha o usuario e a senha para continuar.')
         } else {
             setError('')
             try {
-                 api.get("https://localhost:5001/Logins", {
-                    login,
-                    passwd
-                });
-                setLogin(response);
-                localStorage.clear();
-                localStorage.setItem('@usuario', login)
-                window.location.href = '/portal/home'
+                axios.post("/Dados/Login", {
+                    Login,
+                    Passwd
+                }).then(function(response) {
+                    console.log('Autorizado');
+                    localStorage.setItem('@login', Login)
+                    window.location.href = "/portal/home";
 
-            } catch (err) {
+                }).catch(function (error) {
+                    console.log('Não Autorizado');
+                    setError("Houve um problema com o login, verifique suas credenciais ou click em recuperar sua senha.");
+                    
+                });
+            } catch (error) {
                 setError("Houve um problema com o login, verifique suas credenciais ou entre em contato com o T.I.");
             }
         }
-    }
+    } 
+            
 
     return (
 
@@ -97,7 +105,7 @@ export default function AcessoSistema() {
             spacing={0}
             direction="column"
             alignItems="center"
-            justify="top"
+            justifyContent="center"
             style={{ minHeight: '180vh' }}
         >
             <CssBaseline />
@@ -108,8 +116,7 @@ export default function AcessoSistema() {
                 lg-offset={5}
                 component={Paper}
                 elevation={6}
-            >   <Grid
-                imagem
+            >   <Grid           
                 className={classes.imagem}>
                 <img src={logo} alt={"logo"}/> 
                 </Grid>
@@ -122,9 +129,9 @@ export default function AcessoSistema() {
                         autoComplete="off"
                         variant="filled"
                         required
-                        id="login"
+                        id="Login"
                         label="Login"
-                        name="login"
+                        name="Login"
                         onChange={e => setLogin(e.target.value)}
                         className={classes.input}
                     />
@@ -149,17 +156,28 @@ export default function AcessoSistema() {
                         Logar
                     </Button>
                     <Button
-                        type="submit"
-                        fullWidth
-                        variant="contained"
-                        color="primary"
-                        className={classes.submit}
+                       variant="contained" 
+                       color="primary" 
+                       href="/portal/CadastroUsuario"
+                       className={classes.submit}
+                        
                     >
                         Cadastrar
                     </Button>
+                    <Button
+                       variant="contained" 
+                       color="primary" 
+                       href="/portal/recuperar"
+                       className={classes.submit2}
+                        
+                    >
+                        Recuperar Senha
+                    </Button>
+
                     {error && <p>{error}</p>}
                     <Grid container>
                         <Grid item xs>
+
                         </Grid>
                     </Grid>
                 </form>

@@ -35,12 +35,14 @@ const useStyles = makeStyles(theme => ({
   },
   appBar: {
     marginLeft: drawerWidth,
+    backgroundColor: 'black',
     [theme.breakpoints.up('sm')]: {
       width: `calc(100% - ${drawerWidth}px)`,
     },
   },
   menuButton: {
     marginRight: theme.spacing(2),
+    
     [theme.breakpoints.up('sm')]: {
       display: 'none',
     },
@@ -51,11 +53,12 @@ const useStyles = makeStyles(theme => ({
     color: "#ffffff",
     width: drawerWidth,
   },
+  // ------------------------
   content: {
     flexGrow: 1,
-    padding: theme.spacing(3),
+    padding: theme.spacing(1)
   },
-
+  // ------------------------
 }));
 
 
@@ -114,7 +117,7 @@ function NavBar(props) {
     <div className={classes.root}>
       <CssBaseline />
       <AppBar className={classes.appBar}>
-        <Toolbar>
+        <Toolbar >
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -161,7 +164,9 @@ function NavBar(props) {
       </nav>
       <main className={classes.content}>
         <div className={classes.toolbar} />
+
         {text}
+      
       </main>
     </div>
   );
