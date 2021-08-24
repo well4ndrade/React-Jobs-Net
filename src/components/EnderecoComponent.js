@@ -16,11 +16,8 @@ import PinDropIcon from '@material-ui/icons/PinDrop';
 import StreetviewIcon from '@material-ui/icons/Streetview';
 import axios from "axios";
 
+
 function App() {
-
- 
-
-
     function onSubmit(values, actions) {
       console.log('SUBMIT', values);
     }
@@ -46,6 +43,7 @@ function App() {
         setCidade(data.localidade);
         setUf(data.uf);
         setCep(data.cep);
+     
       });
   }
   
@@ -93,7 +91,7 @@ const [estado, setUf] = useState('');
 const [error, setError] = useState('');
 async function handleSignIn(e) {
   e.preventDefault();
-  
+
   const usuarioId = localStorage.getItem('@idusuario');
 
   console.log(cep);
@@ -104,33 +102,37 @@ async function handleSignIn(e) {
   console.log(estado);
   console.log(usuarioId);
 
+
+  
+
   if (cep === '' || logradouro === '' || numero === '' || bairro === '' || cidade === '' || estado === '' ) {
       setError('Preencha todos os campos para continuar.')
   } else { 
       setError('')
-      try {
-        axios.post("https://localhost:5001/Enderecos", {
-          cep,
-          logradouro,
-          numero,
-          bairro,
-          cidade,
-          estado,
-          usuarioId
-          
-        }).then(function(response) {
-          console.log('Cadastrado');  
-          window.location.href = "/portal/home";            
+      try {      
+        
+          axios.post("https://localhost:5001/Enderecos", {
+            cep,
+            logradouro,
+            numero,
+            bairro,
+            cidade,
+            estado,
+            usuarioId
+            
+          }).then(function(response) {
+            console.log('Cadastrado');  
+            window.location.href = "/portal/home";            
 
-        }).catch(function (error) {
-          console.log('Erro ao concluir cadastro. Verifique o prenchumento dos campos.');
-          
-        });
-    } catch (error) {
-       
-    }
-
-setError("Os campos não foram totalmente preenchidos.");
+          }).catch(function (error) {
+            console.log('Erro ao concluir cadastro. Verifique o prenchumento dos campos.');
+            
+          });
+      } catch (error) {
+         
+      }
+  
+  setError("Os campos não foram totalmente preenchidos.");
 
 }
 } 
@@ -152,73 +154,76 @@ setError("Os campos não foram totalmente preenchidos.");
         render={({ isValid, setFieldValue }) => (
         <form onSubmit={handleSignIn}>
         <Paper className={classes.paper}>
-            <Grid container xs={12} spacing={1}>
+            <Grid item xs={12} spacing={1}>
 
-            <Grid container xs={12} spacing={1}>
+            <Grid item xs={12} spacing={1}>
               <Grid item xs={12}  imagem className={classes.imagem}>
                 <img class="displayed" src={logo} alt={"logo"} /> 
               </Grid>
-            </Grid> 
+            </Grid>
+            <div><br></br></div>
            
-            <Grid container xs={12} spacing={1}>   
+            <Grid item xs={12} spacing={1}>   
             <Grid  item xs={12}>
               <Typography variant="h4" component="h5">
-                 Endereço
+                 Dados de Endereço
               </Typography>
               </Grid>
             </Grid>
+           
             <div><br></br></div>
           
-             <Grid container xs={12} spacing={1}>   
+             <Grid item xs={12} spacing={1}>   
               <Grid  item xs={12} fullWidth={true}> 
-                  <LocationOnIcon/><TextField name="cep" type="text" label="CEP"  onBlur={(ev) => onBlurCep(ev, setFieldValue)} />
+                  <LocationOnIcon/><h7>CEP</h7><br></br> <Field name="cep" type="text" label="CEP"  onBlur={(ev) => onBlurCep(ev, setFieldValue)} />
               </Grid>
              </Grid>
 
-             <Grid container xs={12} spacing={1}>   
+             <Grid item xs={12} spacing={1}>   
               <Grid  item xs={12}>  
-                <MyLocationIcon/> <Field name="logradouro" label="Logradouro"   type="text" />  
+                <MyLocationIcon/><h7>Logradouro</h7><br></br> <Field name="logradouro" label="Logradouro"/>
               </Grid>
             </Grid>
 
-              <Grid container xs={12} spacing={1}>   
+              <Grid item xs={12} spacing={1}>   
                <Grid  item xs={12}>  
-                <Filter5Icon/> <Field  name="numero" label="Número" type="text" />
-              </Grid>
+                <Filter5Icon/><h7>Número</h7><br></br> <Field  name="value" label="Número" type="text" onChange={(e) => setNumero(e.target.value)} />
+             </Grid>
             </Grid>
 
 
-                 <Grid container xs={12} spacing={1}>   
+                 <Grid item xs={12} spacing={1}>   
               <Grid  item xs={12}>  
-                <StreetviewIcon/><Field name="bairro" label="Bairro"  type="text" />
+                <StreetviewIcon/><h7>Bairro</h7><br></br> <Field name="bairro" label="Bairro"  type="text" />
                  </Grid>
             </Grid>
             
-                 <Grid container xs={12} spacing={1}>   
+                 <Grid item xs={12} spacing={1}>   
               <Grid  item xs={12}>  
-                <LocationCityIcon/><Field name="cidade" label="Cidade"   type="text" />
+                <LocationCityIcon/><h7>Cidade</h7><br></br> <Field name="cidade" label="Cidade"   type="text" />
                  </Grid>
             </Grid>
 
-                 <Grid container xs={12} spacing={1}>   
+                 <Grid item xs={12} spacing={1}>   
               <Grid  item xs={12}>  
                 <LocalLibraryIcon/><Field name="estado" label="Estado"   type="text" />
                  </Grid>
             </Grid>
 
             </Grid>
-           
+            </Paper>
             <Grid item xs={12} className={classes.paper} >
           
             <Button  
               type="submit"
-              fullWidth                    
+              fullWidth={true}                
               variant="contained"
               color="primary">
-              AVANÇAR
+
+              CONCLUIR CADASTRO
             </Button>
             </Grid>
-                  </Paper>
+                 
          </form>  
         
         )}
