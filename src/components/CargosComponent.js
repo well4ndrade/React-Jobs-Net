@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function AdminComponent() {
+export default function CargosComponent() {
     const classes = useStyles()
     const [dadosVagas, setVagas] = useState([]);
     const [carregando, setCarregando] = useState('');
@@ -52,7 +52,9 @@ export default function AdminComponent() {
 
     const columns = [
         { name: "id", label: "ID" },
-        { name: "nome", label: "Nome" },
+        { name: "nome", label: "Cargo" },
+        { name: "local", label: "Localidade" },
+        { name: "salario", label: "Salário" },
         { name: "descricao", label: "Descrição" },
        
     ];
