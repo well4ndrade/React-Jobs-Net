@@ -1,13 +1,13 @@
 import React from 'react';
 import Container from '@material-ui/core/Box';
 import MiniDrawer from '../components/MenuComponent.js';
-import CurriculoComponent from '../components/CurriculoComponent.js';
+import VagasComponent from '../components/VagasComponent.js';
 
-export default function CurriculoPage() {
+export default function VagasPage() {
   return (
     <div >
       <Container  >
-      <MiniDrawer  corpo={<CurriculoComponent />} />
+      <MiniDrawer  corpo={<VagasComponent />} />
       </Container>
     </div>
   );

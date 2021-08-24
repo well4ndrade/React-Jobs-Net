@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function CurriculoComponent() {
+export default function VagasComponent() {
     const classes = useStyles()
     const [retorno, setRetorno] = useState([]);
     const [error, setError] = useState('');

@@ -93,7 +93,7 @@ export default function SpacingGrid() {
         localStorage.setItem('VAGA', nome);
         localStorage.setItem('LOCAL', local);
         localStorage.setItem('SALARIO', salario);
-        window.location.href = `/portal/cargos`;
+        window.location.href = `/portal/vagas`;
     }
 
     useEffect(() => {
@@ -104,7 +104,7 @@ export default function SpacingGrid() {
     function vagaEscolhida(vaga){
         console.log(vaga)
         localStorage.setItem('VAGAE', vaga);
-        window.location.href = "/portal/curriculo";
+        window.location.href = "/portal/vagas";
     }
 
     return (
