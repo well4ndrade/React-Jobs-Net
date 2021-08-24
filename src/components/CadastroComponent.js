@@ -211,7 +211,7 @@ export default function CadastroComponent() {
                     options={options}
                 />
             </Paper>
-        </form >
+        </form>
         
 
         

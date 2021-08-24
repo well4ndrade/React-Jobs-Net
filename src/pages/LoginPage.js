@@ -1,9 +1,9 @@
 import React from 'react';
 
-import AcessoSistema from '../components/loginComponent.js'
+import AcessoSistema from '../components/LoginComponent.js'
 import './login.css';
 
-function loginPage() {
+function  loginPage() {
     return (
         <div className="login" >
             <AcessoSistema > </AcessoSistema>

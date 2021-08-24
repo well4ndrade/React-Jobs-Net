@@ -2,12 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-
+import { Link } from 'react-router-dom'
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
-
 import Typography from '@material-ui/core/Typography';
-
+import axios from "axios";
+import Button from '@material-ui/core/Button';
+import Divider from '@material-ui/core/Divider';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -17,136 +18,164 @@ const useStyles = makeStyles((theme) => ({
         padding: theme.spacing(2),
         textAlign: 'center',
         color: theme.palette.text.secondary,
+    botao: {
+        flexGrow: 1,
+        itemAlign: 'center',
+    },
+    },
+    textField: {
+        width: '100%',
+        height: '100%',
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        paddingBottom: 0,
+        marginTop: 0,
+        fontWeight: 500
+    },
+    titulo: {
+        flexGrow: 1,
+        marginTop: 30,
+        textAlign: 'center',
+    },
+    subtitulo: {
+        flexGrow: 1,
+        marginTop: 30,
+        textAlign: 'center',
+    },
+    banner: {
+        flexGrow: 1,
+        marginLeft: 10,
+        textAlign: 'center',
+    },
+    paper: {
+        padding: theme.spacing(2),
+        textAlign: 'center',
+        color: theme.palette.text.secondary,
     },
 }));
-
+    
+   
 export default function SpacingGrid() {
-    const [spacing, setSpacing] = React.useState(2);
     const classes = useStyles();
-    const [listaDeVagas, setListaDeVagas] = useState([])
-    const [TestebuscaVagas, setBuscaVagasRetorno] = useState('')
-
-    async function flistaVagas() {
-        try {
-            //const listaDeVagas = await api.get(`/Vagas`);
-            //setListaDeVagas(listaDeVagas.data);
-            setListaDeVagas('GET VAGA');
-        } catch (error) {
-            console.log(error);
-        }
-    }
+    const [dadosVagas, setVagas] = useState([]);
 
     async function buscaVagas() {
-        setBuscaVagasRetorno(false)
-         
         try {
-            //const buscaVagas = await api.get(`/Vagas/:id`);
-            //setBuscaVagas(buscaVagas.data);
-            if (TestebuscaVagas) {
-                // setBuscaVagasRetorno(buscaVagas)
-                console.log('Achou a vaga')
-            } else {
-                console.log('Não achou a vaga')
-                // listaVagas();
-            }
+
+            axios.get('/Vagas').then(response => {
+
+                setVagas(response.data)
+
+            }).catch(function (error) {
+
+                console.log(error.config);
+            });
+
         } catch (error) {
-            console.log(error);
         }
-    }
-    useEffect(() => {
-        flistaVagas();
-    }, []);
-
-
-
-    const listaTodasVagas = [
-        {
-            id: '1',
-            vaga: 'Desenvolvedor Júnior',
-            localidade: 'Campina Grande - PB',
-            salario: 'R$ 9999.000,00'
-        },
-        {
-            id: '2',
-            vaga: 'Engenheiro de Minas',
-            localidade: 'Minas Gerais - MG',
-            salario: 'R$ 5.000,00'
-        },
-        {
-            id: '3',
-            vaga: 'Engenheiro Eletricista',
-            localidade: 'João Pessoa - PB',
-            salario: 'R$ 15.000,00'
-        }
+<<<<<<< HEAD
     ]
  
+=======
+    }
 
-    function vagaDetalhe(id, local, vaga, salario) {
-        localStorage.setItem('ID', id);
-        localStorage.setItem('LOCAL', local);
-        localStorage.setItem('VAGA', vaga);
-        localStorage.setItem('SALARIO', salario);
+    useEffect(() => {
+        buscaVagas()
+    }, [])
+>>>>>>> 7b0c74e458c02f89b89f7672858305509494d3d4
+
+    function vagaDetalhe(nome) {
+        localStorage.setItem('VAGA', nome);
         window.location.href = `/portal/cadastro`;
     }
 
     return (
-        <div className={classes.root}>
-            <Paper className={classes.paper}>
-
-                <Grid container spacing={1}>
-
-                    <Grid item xs={12}>
-                        <Autocomplete
-
-
-                            onChange={() => buscaVagas()}
-
-                            id="free-solo-demo"
-                            freeSolo
-                            options={listaTodasVagas.map((option) => option.vaga)}
-                            renderInput={(params) => (
-                                <TextField {...params} label="freeSolo" margin="normal" variant="outlined" />
-                            )}
-                        />
+       
+            <form  
+            id="form"
+            name="form"
+            className={classes.root}
+            noValidate
+            autoComplete="off">
+                <Paper className={classes.paper}>
+                    <Grid container xs={12} spacing={1} >
+                        <Grid item xs={12} spacing={1} >
+                            <Typography variant="h4" component="h4" className={classes.titulo}>
+                                Seja bem-vindo(a) ao JobsNet
+                            </Typography>
+                        </Grid>
+                        <Grid item xs={12} spacing={1}>
+                            <Typography variant="h6" component="h6" className={classes.subtitulo}>
+                                Pequise uma vaga de emprego que mais combina com você
+                            </Typography>
+                        </Grid>
                     </Grid>
-
-                    <div><br /></div>
-
-                    <Grid container spacing={3} style={{ backgroundColor: "#D9D9D9", color: "#FFFFFF" }}>
-
-
-                        {listaTodasVagas.map((row) => (
-                            <Grid item xs={4}>
+                   
+                    <Grid xs={12} spacing={1} >
+                        <Grid  xs={12} spacing={1}  >
+                            <Autocomplete
+                                    id="free-solo-demo"
+                                    freeSolo
+                                    options={dadosVagas.map((option) => option.nome)}
+                                    renderInput={(params) => (
+                                        <TextField {...params} label="Pesquise uma vaga..." margin="normal" variant="outlined" />
+                                    )}
+                                />
+                        </Grid>
+                    </Grid>    
+                </Paper>
+                <Grid item xs={12} className={classes.paper} >
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            href="/portal/admin"
+                        >
+                            BUSCAR
+                        </Button>
+                    </Grid>
+                <Divider/>
+                <Paper>
+                    <Grid container xs={12} spacing={1}>
+                        <Grid item xs={12} spacing={1} className={classes.banner}>
+                            <Grid container spacing={3}>
+                            {dadosVagas.map((option) => (
+                            <Grid item xs={4} spacing={0}>
                                 <Paper
 
-                                    onClick={() => vagaDetalhe(row.id, row.localidade, row.vaga, row.salario)}
+                                    onClick={() => vagaDetalhe(option.id, option.local, option.nome, option.salario)}
 
                                     style={{ backgroundColor: "#2aa745", textAlign: "center", fontSize: 15, color: "#FFFFFF" }}>
                                     <Typography>
                                         Vaga
                                     </Typography>
                                     <Typography>
-                                        {row.vaga}
+                                        {option.nome}
                                     </Typography>
                                     <Typography>
                                         Localidade
                                     </Typography>
                                     <Typography>
-                                        {row.localidade}
+                                        {option.local}
                                     </Typography>
                                     <Typography>
                                         Salário
                                     </Typography>
                                     <Typography>
-                                        {row.salario}
+                                        R$ {option.salario}
                                     </Typography>
                                 </Paper>
                             </Grid>
                         ))}
+                        </Grid>
+                        </Grid>
                     </Grid>
-                </Grid>
-            </Paper>
-
-        </div>
+                </Paper>
+            </form>
+           
+           
+            
+       
     );
 }
+
+

@@ -15,6 +15,7 @@ import TextField from '@material-ui/core/TextField';
 import EmailIcon from '@material-ui/icons/Email';
 import SettingsCellIcon from '@material-ui/icons/SettingsCell';
 import Paper from "@material-ui/core/Paper";
+import './EnderecoComponent.css';
 
 const useStyles = makeStyles((theme) => ({
   root:
@@ -22,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
       flexGrow: 1,
   },
   paper: {
-      padding: theme.spacing(2),
+      padding: theme.spacing(1),
       textAlign: 'center',
       color: theme.palette.text.secondary,
   botao: {
@@ -31,17 +32,21 @@ const useStyles = makeStyles((theme) => ({
   },
   },
   textField: {
-      width: '100%',
-      height: '100%',
+      width: '40ch',
       marginLeft: 'auto',
       marginRight: 'auto',
       paddingBottom: 0,
       marginTop: 0,
-      fontWeight: 500
+      fontWeight: 500,
+      textalign: 'center',
   }
   ,
   imagem: {
     itemAlign: 'center',
+  },
+  input: {
+
+    width: '30%'
   }
   
 }));
@@ -77,8 +82,7 @@ const generos = [
     const [possuiHabilitacao, setPossuiHabilitacao] = useState('');
     const [error, setError] = useState('');
   
-    useEffect(() => { console.log("Deu erro") }, [error]
-    )
+    useEffect(() => { console.log("Deu erro") }, [error])
    
 
     
@@ -107,164 +111,144 @@ const generos = [
 
   return (
 
-    <form
-    id="form"
-    name="form"
-    className={classes.root}
-    noValidate
-    autoComplete="off">
-      <Paper className={classes.paper}>
+    <form id="form" name="form" className={classes.root} noValidate  autoComplete="off">
+    <Paper className={classes.paper}>
+        <Grid container xs={12} spacing={1}>
 
         <Grid container xs={12} spacing={1}>
-        <Grid container xs={12} spacing={1}>
-          <Grid item xs={6}  imagem className={classes.imagem}>
+          <Grid item xs={12}  imagem className={classes.imagem}>
             <img class="displayed" src={logo} alt={"logo"} /> 
           </Grid>
         </Grid>  
+
         <Grid container xs={12} spacing={1}> 
+          <Grid  item xs={12}>
           <Typography variant="h4" component="h5">
-          Cadastrar Dados
+            Cadastrar Dados
+            <div><br></br></div>
           </Typography>
+          </Grid>
         </Grid>
-                    
-                
-                
-                <FaceIcon /><TextField
-                        required
-                        id="nome"
-                        label="Nome Completo"
-                        name="nome"
-                        onChange={(e)=> setNome(e.target.value)}
-                     
-                    />
-                 <AssignmentIcon/><TextField
-                        required
-                        id="rg"
-                        label="RG"
-                        name="rg"
-                        onChange={(e)=> setRg(e.target.value)}
-                        className={classes.input}
-                    />
-                  <AssignmentIcon/><TextField
-                        required
-                        id="cpf"
-                        label="CPF"
-                        name="cpf"
-                        onChange={(e) => setCpf(e.target.value)}
-                        className={classes.input}
-                    />
-                  <WcIcon/><TextField
-                        id="standard-select-estadocivi-native"
-                        select
-                        label="Gênero"
-                        value={genero}
-                        onChange={handleChange}
-                        SelectProps={{
-                          native: true,
-                        }}
-                      >
-                          {generos.map((option) => (
-                          <option key={option.value} value={option.value}>
-                            {option.label}
-                          </option>
-                        ))}
+
+        <Grid container xs={12} spacing={1}>  
+          <Grid  item xs={12}>        
+            <FaceIcon /><TextField required id="nome" label="Nome Completo" name="nome"onChange={(e)=> setNome(e.target.value)}/> 
+          </Grid>
+        </Grid>
+
+        <Grid container xs={12} spacing={1}> 
+          <Grid  item xs={12}>  
+            <AssignmentIcon/><TextField required id="rg" label="RG" name="rg" onChange={(e)=> setRg(e.target.value)}/>
+          </Grid>
+        </Grid>
+
+        <Grid container xs={12} spacing={1}>
+          <Grid  item xs={12}>  
+              <AssignmentIcon/><TextField required id="cpf" label="CPF" name="cpf" onChange={(e) => setCpf(e.target.value)}/>
+          </Grid>
+        </Grid>
+
+        <Grid container xs={12} spacing={1}>
+          <Grid  item xs={12} >   
+          <div class="div-select"> 
+            <WcIcon/><TextField
+              id="genero"
+              select  
+              label="Gênero"
+              value={genero}
+              onChange={handleChange}
+              className={classes.root}
+              SelectProps={{
+              native: true, }}>
+                {generos.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>))}
                   </TextField>
-                  <DateRangeIcon/><TextField
-                        required
-                        id="nascimento"
-                        label="Data Nascimento"
-                        name="nascimento"
-                        onChange={(e) => setNascimento(e.target.value)}
-                        className={classes.input}
-                    />
-                  <SettingsCellIcon/><TextField
-                        required
-                        id="celular"
-                        label="Celular"
-                        name="celular"
-                        onChange={(e) => setTelefone(e.target.value)}
-                        className={classes.input}
-                    />
-                 <SettingsPhoneIcon/><TextField
-                        id="telefone"
-                        label="Telefone"
-                        name="telefone"
-                        onChange={(e) => setTelefone2(e.target.value)}
-                        className={classes.input}
-                    />
-                  <AssignmentIcon/><TextField
-                        id="standard-select-genero-native"
-                        select
-                        label="Estado Civil"
-                        value={estadocivi}
-                        onChange={handleCivil}
-                        SelectProps={{
-                          native: true,
-                        }}
-                      >
-                          {estadocivil.map((option) => (
-                          <option key={option.value} value={option.value}>
-                            {option.label}
-                          </option>
-                        ))}
-                    </TextField>
-                    <EmailIcon/><TextField
-                        required
-                        id="email"
-                        label="E-mail"
-                        name="email"
-                        onChange={(e) => setEmail(e.target.value)}
-                        className={classes.input}
-                    />
-                     <EmailIcon/><TextField
-                        required
-                        id="profissao"
-                        label="Profissão"
-                        name="profissao"
-                        onChange={(e) => setProfissao(e.target.value)}
-                        className={classes.input}
-                    />
-                    <DriveEtaIcon/><TextField
-                        required
-                        id="veiculo"
-                        label="Possui Veículo?"
-                        name="veiculo"
-                        onChange={(e) => setPossuiVeiculo(e.target.value)}
-                        className={classes.input}
-                    />
-                    <AssignmentIcon/><TextField
-                        required
-                        id="habilitação"
-                        label="Possui Habilitação?"
-                        name="habilitação"
-                        onChange={(e) => setPossuiHabilitacao(e.target.value)}
-                        className={classes.input}
-                    />
-                    <Grid>
-                    <a href='/portal/endereco'>
-                  <Button
-                        fullWidth
-                        variant="contained"
-                        color="primary"
-                    >
-                    AVANÇAR
-                    </Button></a>
-                    </Grid>
-                    <Grid container>
-                        <Grid item xs>
-                        </Grid>
-                    </Grid>
-                
-           
-
+                  </div>
+            </Grid>
         </Grid>
-        </Paper>
-      </form >
-    );
- }
 
+        <Grid container xs={12} spacing={1}>
+         <Grid  item xs={12}>
+            <AssignmentIcon/><TextField
+                id="civil"
+                select
+                className={classes.root}
+                label="Estado Civil"
+                value={estadocivi}
+                onChange={handleCivil}
+                fullWidth={false}
+                SelectProps={{
+                native: true,
+                }}>
+                  {estadocivil.map((option) => (
+                    <option key={option.value} value={option.value}>
+                      {option.label}
+                    </option>))}</TextField>
+            </Grid>  
+          </Grid>     
+
+          <Grid container xs={12} spacing={1}> 
+            <Grid  item xs={12}>         
+              <DateRangeIcon/><TextField required id="nascimento" label="Data Nascimento" name="nascimento" onChange={(e) => setNascimento(e.target.value)}/>
+              </Grid>  
+          </Grid> 
+
+          <Grid container xs={12} spacing={1}> 
+            <Grid  item xs={12}>  
+              <SettingsCellIcon/><TextField required id="celular" label="Celular" name="celular" onChange={(e) => setTelefone(e.target.value)} />
+              </Grid>  
+          </Grid>  
+
+          <Grid container xs={12} spacing={1}> 
+            <Grid  item xs={12}>
+                <SettingsPhoneIcon/><TextField id="telefone" label="Telefone" name="telefone" onChange={(e) => setTelefone2(e.target.value)} />
+              </Grid>  
+          </Grid>  
+
+          <Grid container xs={12} spacing={1}> 
+            <Grid  item xs={12}>
+              <EmailIcon/><TextField required id="email" label="E-mail" name="email" onChange={(e) => setEmail(e.target.value)}/>
+              </Grid>  
+          </Grid>  
+
+          <Grid container xs={12} spacing={1}> 
+            <Grid  item xs={12}>
+              <EmailIcon/><TextField required id="profissao" label="Profissão" name="profissao" onChange={(e) => setProfissao(e.target.value)} />
+              </Grid>  
+          </Grid> 
+
+          <Grid container xs={12} spacing={1}> 
+            <Grid  item xs={12}>
+              <DriveEtaIcon/><TextField required id="veiculo" label="Possui Veículo?" name="veiculo" onChange={(e) => setPossuiVeiculo(e.target.value)} />
+            </Grid>  
+          </Grid>
+          
+          <Grid container xs={12} spacing={1}> 
+            <Grid  item xs={12}>
+                <AssignmentIcon/><TextField required id="habilitação" label="Possui Habilitação?" name="habilitação"
+                        onChange={(e) => setPossuiHabilitacao(e.target.value)} />
+          </Grid>
+          </Grid>
+          </Grid>
+      </Paper>
+    
+        <Grid item xs={12} className={classes.paper} >
+          <a href ='http://localhost:3000/portal/endereco'>
+            <Button  
+              fullWidth                    
+              variant="contained"
+              color="primary">
+              AVANÇAR
+            </Button></a>
+        </Grid>
+        </form>     
+  );
+
+}
 
                     
 
 
-   
+
