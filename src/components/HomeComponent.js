@@ -1,234 +1,192 @@
 import React, { useState, useEffect } from 'react';
-import { Formik, Field, Form } from 'formik';
-import Typography from '@material-ui/core/Typography';
-import Grid from '@material-ui/core/Grid';
-import logo from '../imagens/192.png' // relative path to image 
-import Paper from "@material-ui/core/Paper";
-import Button from "@material-ui/core/Button";
 import { makeStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
+import { Link } from 'react-router-dom'
 import TextField from '@material-ui/core/TextField';
-import LocationOnIcon from '@material-ui/icons/LocationOn';
-import LocationCityIcon from '@material-ui/icons/LocationCity';
-import MyLocationIcon from '@material-ui/icons/MyLocation';
-import Filter5Icon from '@material-ui/icons/Filter5';
-import LocalLibraryIcon from '@material-ui/icons/LocalLibrary';
-import PinDropIcon from '@material-ui/icons/PinDrop';
-import StreetviewIcon from '@material-ui/icons/Streetview';
+import Autocomplete from '@material-ui/lab/Autocomplete';
+import Typography from '@material-ui/core/Typography';
 import axios from "axios";
+import Button from '@material-ui/core/Button';
+import Divider from '@material-ui/core/Divider';
+import Box from '@material-ui/core/Box';
 
-function App() {
-
- 
-
-
-    function onSubmit(values, actions) {
-      console.log('SUBMIT', values);
-    }
-  
-    function onBlurCep(ev, setFieldValue) {
-      const { value } = ev.target;
-  
-      const cep = value?.replace(/[^0-9]/g, '');
-  
-      if (cep?.length !== 8) {
-        return;
-      }
-
-      fetch(`https://viacep.com.br/ws/${cep}/json/`)
-      .then((res) => res.json())
-      .then((data) => {
-        setFieldValue('logradouro', data.logradouro);
-        setFieldValue('bairro', data.bairro);
-        setFieldValue('cidade', data.localidade);
-        setFieldValue('uf', data.uf);
-      });
-  }
-  
- const useStyles = makeStyles((theme) => ({
-  root:
-  {
-      flexGrow: 1,
-  },
-  paper: {
-      padding: theme.spacing(1),
-      textAlign: 'center',
-      color: theme.palette.text.secondary,
-  botao: {
-      flexGrow: 1,
-      itemAlign: 'center',
-  },
-  },
-  textField: {
-      width: '40ch',
-      marginLeft: 'auto',
-      marginRight: 'auto',
-      paddingBottom: 0,
-      marginTop: 0,
-      fontWeight: 500,
-      textalign: 'center',
-  }
-  ,
-  imagem: {
-    itemAlign: 'center',
-  },
-  input: {
-
-    width: '30%'
-  }
-  
+const useStyles = makeStyles((theme) => ({
+    root: {
+        flexGrow: 1,
+    },
+    paper: {
+        padding: theme.spacing(2),
+        textAlign: 'center',
+        color: theme.palette.text.secondary,
+        botao: {
+            flexGrow: 1,
+            itemAlign: 'center',
+        },
+    },
+    textField: {
+        width: '100%',
+        height: '100%',
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        paddingBottom: 0,
+        marginTop: 0,
+        fontWeight: 500
+    },
+    titulo: {
+        flexGrow: 1,
+        marginTop: 30,
+        textAlign: 'center',
+    },
+    subtitulo: {
+        flexGrow: 1,
+        marginTop: 30,
+        textAlign: 'center',
+    },
+    banner: {
+        flexGrow: 1,
+        marginLeft: 10,
+        textAlign: 'center',
+    },
+    paper: {
+        padding: theme.spacing(2),
+        textAlign: 'center',
+        color: theme.palette.text.secondary,
+    },
 }));
 
-const classes = useStyles();
-const [Nome, setNome] = useState('');
-const [Cpf, setCpf] = useState('');
-const [Rg, setRg] = useState('');
-const [Genero, setgenero] = useState('');
-const [Nascimento, setnascimento] = useState('');
-const [Telefone, settelefone] = useState('');
-const [Telefone2, settelefone2] = useState('');
-const [Email, setemail] = useState('');
-const [Profissao, setprofissao] = useState('');
-const [Estadocivi, setestadocivi] = useState('');
-const [PossuiVeiculo, setpossuiVeiculo] = useState('');
-const [PossuiHabilitacao, setpossuiHabilitacao] = useState('');
-const [cep, setcep] = useState('');
-const [logradouro, setlogradouro] = useState('');
-const [numero, setnumero] = useState('');
-const [complemento, setcomplemento] = useState('');
-const [bairro, setbairro] = useState('');
-const [cidade, setcidade] = useState('');
-const [uf, setuf] = useState('');
-const [error, setError] = useState('');
-async function handleSignIn(e) {
-  e.preventDefault();
-  localStorage.clear();
 
-  if (cep === '' || logradouro === '' || numero === '' || bairro === '' || cidade === '' || uf === '' ) {
-      setError('Preencha todos os campos para continuar.')
-  } else { 
-      setError('')
-      try {
-          axios.post("/Endereco/", {
-            cep,
-            logradouro,
-            numero,
-            bairro,
-            cidade,
-            uf,
-            "pais" : "Brasil",
-            
-          }).then(function(response) {
-              console.log('Cadastrado');
-              
+export default function SpacingGrid() {
+    const classes = useStyles();
+    const [dadosVagas, setVagas] = useState([]);
+    const [dadosVagas1, setVagas1] = useState([]);
+    const [nome, setNome] = useState([]);
 
-          }).catch(function (error) {
-              console.log('Usuario já existe');
-            
-          });
-      } catch (error) {
-         
-      }
-  
-  setError("As senhas não conferem.");
+    async function buscaVagas() {
+        try {
+            axios.get('/Vagas').then(response => {
+                setVagas(response.data)
+            }).catch(function (error) {
+                console.log(error.config);
+            });
 
-}
-} 
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
-  return (
-    <div className="App">
-      <Formik
-        onSubmit={onSubmit}
-        validateOnMount
-        initialValues={{
-          cep: '',
-          logradouro: '',
-          numero: '',
-          complemento: '',
-          bairro: '',
-          cidade: '',
-          uf: '',
-        }}
-        render={({ isValid, setFieldValue }) => (
-        <form onSubmit={handleSignIn}>
-        <Paper className={classes.paper}>
-            <Grid container xs={12} spacing={1}>
 
-            <Grid container xs={12} spacing={1}>
-              <Grid item xs={12}  imagem className={classes.imagem}>
-                <img class="displayed" src={logo} alt={"logo"} /> 
-              </Grid>
-            </Grid> 
-           
-            <Grid container xs={12} spacing={1}>   
-            <Grid  item xs={12}>
-              <Typography variant="h4" component="h5">
-                 Endereço
-              </Typography>
-              </Grid>
-            </Grid>
-            <div><br></br></div>
-          
-             <Grid container xs={12} spacing={1}>   
-              <Grid  item xs={12} fullWidth={true}> 
-                  <LocationOnIcon/><TextField  name="cep" type="text" label="CEP"  onBlur={(ev) => onBlurCep(ev, setFieldValue)} />
-              </Grid>
-             </Grid>
+    async function buscaVagas1() {
+        try {
+            axios.get('/Vagas/filtro').then(response => {
+                setVagas1(response.data)
+            }).catch(function (error) {
+                console.log(error.config);
+            });
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
-             <Grid container xs={12} spacing={1}>   
-              <Grid  item xs={12}>  
-                <MyLocationIcon/> <Field name="logradouro" label="Logradouro"   type="text" />  
-              </Grid>
-            </Grid>
+    function vagaDetalhe(id, local, nome, salario) {
+        localStorage.setItem('ID', id);
+        localStorage.setItem('VAGA', nome);
+        localStorage.setItem('LOCAL', local);
+        localStorage.setItem('SALARIO', salario);
+        window.location.href = `/portal/cargos`;
+    }
 
-              <Grid container xs={12} spacing={1}>   
-               <Grid  item xs={12}>  
-                <Filter5Icon/> <Field  name="numero" label="Número" type="text" />
-              </Grid>
-            </Grid>
+    useEffect(() => {
+        buscaVagas()
+        buscaVagas1()
+    }, [])
 
-              <Grid container xs={12} spacing={1}>   
-                <Grid  item xs={12}>  
-                <PinDropIcon/><Field name="complemento" label="Complemento"   type="text" />
-                 </Grid>
-            </Grid>
+    function vagaEscolhida(vaga){
+        console.log(vaga)
+        localStorage.setItem('VAGAE', vaga);
+        window.location.href = "/portal/curriculo";
+    }
 
-                 <Grid container xs={12} spacing={1}>   
-              <Grid  item xs={12}>  
-                <StreetviewIcon/><Field name="bairro" label="Bairro"  type="text" />
-                 </Grid>
-            </Grid>
-            
-                 <Grid container xs={12} spacing={1}>   
-              <Grid  item xs={12}>  
-                <LocationCityIcon/><Field name="cidade" label="Cidade"   type="text" />
-                 </Grid>
-            </Grid>
+    return (
 
-                 <Grid container xs={12} spacing={1}>   
-              <Grid  item xs={12}>  
-                <LocalLibraryIcon/><Field name="uf" label="Estado"   type="text" />
-                 </Grid>
-            </Grid>
+        <form
+            id="form"
+            name="form"
+            className={classes.root}
+            noValidate
+            autoComplete="off">
+            <Paper className={classes.paper}>
+                <Grid container spacing={1} >
+                    <Grid item xs={12}>
+                        <Typography variant="h4" component="h4" className={classes.titulo}>
+                            Seja bem-vindo(a) ao JobsNet
+                        </Typography>
+                    </Grid>
+                    <Grid item xs={12}>
+                        <Typography variant="h6" component="h6" className={classes.subtitulo}>
+                            Pequise uma vaga de emprego que mais combina com você
+                        </Typography>
+                    </Grid>
+                </Grid>
 
-            </Grid>
-           
+                <Grid item xs={12}>
+                    <Autocomplete
+                        id="free-solo-demo"
+                        onChange={(event, value) => vagaEscolhida(value)}
+                        freeSolo
+                        options={dadosVagas.map((option) => option.nome)}
+                        renderInput={(params) => (
+                            <TextField {...params} label="Pesquise uma vaga..." margin="normal" variant="outlined" />
+                        )}
+                    />
+                </Grid>
+            </Paper>
             <Grid item xs={12} className={classes.paper} >
-          <a href='http://localhost:3000/portal/home'>
-            <Button  
-              type="submit"
-              fullWidth                    
-              variant="contained"
-              color="primary">
-              AVANÇAR
-            </Button></a>
+                <Button
+                    //onClick={(e)=> setNome(e.target.value)}
+                    variant="contained"
+                    color="primary"
+                    href="/portal/cargos/"
+                >
+                    BUSCAR
+                </Button>
             </Grid>
-                  </Paper>
-         </form>  
-        
-        )}
-      />
-    </div>
-  );
-}
+            <Divider />
+            <Paper>
+                <Grid
+                    container
+                    spacing={2}
+                >
+                    {dadosVagas1.map((option1) => (
+                        <Grid item xs={12} sm={6} md={3}>
+                            <Paper
 
-export default App;
+                                onClick={() => vagaDetalhe(option1.id, option1.local, option1.nome, option1.salario)}
+
+                                style={{ backgroundColor: "#2aa745", textAlign: "center", fontSize: 15, color: "#FFFFFF" }}>
+                                <Typography>
+                                    Vaga
+                                </Typography>
+                                <Typography>
+                                    {option1.nome}
+                                </Typography>
+                                <Typography>
+                                    Localidade
+                                </Typography>
+                                <Typography>
+                                    {option1.local}
+                                </Typography>
+                                <Typography>
+                                    Salário
+                                </Typography>
+                                <Typography>
+                                    R$ {option1.salario}
+                                </Typography>
+                            </Paper>
+                        </Grid>
+                    ))}
+                </Grid>
+            </Paper>
+        </form>
+    );
+}
