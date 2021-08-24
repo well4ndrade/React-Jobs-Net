@@ -82,7 +82,6 @@ export default function AcessoSistema() {
                     Login,
                     Passwd
                 }).then(function(response) {
-                    console.log('Autorizado');
                     localStorage.setItem('@login', Login)
                     window.location.href = "/portal/home";
 

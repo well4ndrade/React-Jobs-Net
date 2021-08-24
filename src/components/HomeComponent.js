@@ -79,7 +79,7 @@ export default function SpacingGrid() {
             salario: 'R$ 15.000,00'
         }
     ]
-
+ 
 
     function vagaDetalhe(id, local, vaga, salario) {
         localStorage.setItem('ID', id);
