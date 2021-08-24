@@ -85,7 +85,7 @@ function NavBar(props) {
         textAlign: 'center',
         alignItems: 'center',
       }} >
-        APP
+        JOBSNET
       </Typography>
       <Divider />
 
