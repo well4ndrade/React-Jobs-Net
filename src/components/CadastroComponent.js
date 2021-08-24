@@ -124,33 +124,31 @@ export default function CadastroComponent() {
     async function cadastraVagas(e) {
         e.preventDefault();
         
-        const idusuario = localStorage.getItem('@idusuario');
-        console.log('BUSCA LOCAL STORAGE ' + idusuario)
-                try {
-                    console.log('POST : ' + idusuario)
+        
+        
+          try {
+         api.post('/Vagas',{
 
-     //     api.post('/Vagas',{
+              nome,
+              local,
+              descricao,
+              salario
 
-     //         nome,
-     //         local,
-     //         descricao,
-     //         salario
-
-     //       }).then(function(response) {
-     //         setRetorno(response.data)
-     //         window.location.href = "/portal/cadastro";
-     //     }).catch(function (error) {
-     //         if (error.response) {
-     //             console.log(error.response.headers);
-     //         }
-     //         else if (error.request) {
-     //             console.log(error.request);
-     //         }
-     //         else {
-     //             console.log(error.message);
-     //         }
-     //         console.log(error.config);
-     //     });
+            }).then(function(response) {
+            setRetorno(response.data)
+              window.location.href = "/portal/cadastro";
+          }).catch(function (error) {
+              if (error.response) {
+                  console.log(error.response.headers);
+              }
+              else if (error.request) {
+                  console.log(error.request);
+              }
+              else {
+                  console.log(error.message);
+              }
+              console.log(error.config);
+          });
          } catch (error) {
         }
     }

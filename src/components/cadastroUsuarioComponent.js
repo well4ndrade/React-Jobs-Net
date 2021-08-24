@@ -8,7 +8,6 @@ import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import axios from "axios";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -21,7 +20,6 @@ const useStyles = makeStyles(theme => ({
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
-        justify: "center",
         alignItems: "center"
     },
     input: {
@@ -78,11 +76,11 @@ export default function AcessoSistema() {
             if(Passwd === PasswdConfirm){
             setError('')
             try {
-                axios.post("/Dados/", {
+                api.post("/Dados/", {
                     Login,
                     Passwd
                 }).then(function(response) {
-                    console.log('Cadastrado');
+                    alert('Usuario cadastrado com sucesso!!');
                     window.location.href = "/portal/login";
 
                 }).catch(function (error) {
@@ -106,7 +104,6 @@ export default function AcessoSistema() {
             spacing={0}
             direction="column"
             alignItems="center"
-            justify="top"
             style={{ minHeight: '140' }}
         >
             <CssBaseline />
@@ -118,7 +115,7 @@ export default function AcessoSistema() {
                 component={Paper}
                 elevation={6}
             >   <Grid
-                imagem
+                
                 className={classes.imagem}>
                 <img src={logo} alt={"logo"}/> 
                 </Grid>

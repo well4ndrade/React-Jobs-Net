@@ -7,7 +7,7 @@ import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import axios from "axios";
+import api from '../services/apiService';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -19,8 +19,7 @@ const useStyles = makeStyles(theme => ({
         margin: theme.spacing(8, 8),
         display: 'flex',
         flexDirection: 'column',
-        justifyContent: 'center',
-        justify: "center",
+        justifyContent: 'center',        
         alignItems: "center"
     },
     input: {
@@ -65,8 +64,6 @@ export default function AcessoSistema() {
     const [error, setError] = useState('');
     
 
-    useEffect(() => { console.log("Deu erro") }, [error])
-
     async function handleSignIn(e) {
         e.preventDefault();
         localStorage.clear();
@@ -77,11 +74,11 @@ export default function AcessoSistema() {
             if(Passwd === PasswdConfirm){
             setError('')
             try {
-                axios.put("/Dados/Alterar", {
+                api.put("/Dados/Alterar", {
                     Login,
                     Passwd
                 }).then(function(response) {
-                    console.log('Atualizado');
+                    alert('Usuario alterado com sucesso!!');
                     window.location.href = "/portal/login";
 
                 }).catch(function (error) {
@@ -105,7 +102,6 @@ export default function AcessoSistema() {
             spacing={0}
             direction="column"
             alignItems="center"
-            justify="top"
             style={{ minHeight: '180vh' }}
         >
             <CssBaseline />
@@ -117,7 +113,7 @@ export default function AcessoSistema() {
                 component={Paper}
                 elevation={6}
             >   <Grid
-                imagem
+                
                 className={classes.imagem}>
                 <img src={logo} alt={"logo"}/> 
                 </Grid>

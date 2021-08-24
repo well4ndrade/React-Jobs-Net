@@ -160,33 +160,33 @@ export default function MiniDrawer(props) {
           </IconButton>
         </div>
         <Divider />
-        <Link style={{ color: '#ffffff' }} href='/portal/home' >
-          <ListItem button key="Home">
-            <ListItemIcon style={{ color: '#ffffff' }}> <HomeIcon /></ListItemIcon>
-            <ListItemText primary="Home" />
-          </ListItem>
-        </Link>
-        <Link style={{ color: '#ffffff' }} href='/portal/dadosp' >
-          <ListItem button key="Dados">
-            <ListItemIcon style={{ color: '#ffffff' }}> <PersonIcon /></ListItemIcon>
-            <ListItemText primary="Dados" />
-          </ListItem>
-        </Link>
-        <Link style={{ color: '#ffffff' }} href='/portal/cargos' >
-          <ListItem button key="Vagas">
-            <ListItemIcon style={{ color: '#ffffff' }}> <AssignmentIndIcon /></ListItemIcon>
-            <ListItemText primary="Vagas" />
-          </ListItem>
-        </Link>
+        <List>
+          {['Inicio', 'Perfil'].map((text, index) => (
+            <ListItem button key={text}>
+              <ListItemIcon>{index % 2 === 0 ? <HomeIcon/> : <PersonIcon /> }</ListItemIcon>
+              <ListItemText primary={text} />
+            </ListItem>
+          ))}          
+        </List>
+        <List>
+          {['Vagas', 'Usuario'].map((text, index) => (
+            <ListItem button key={text}>
+              <ListItemIcon>{index % 2 === 0 ? <AssignmentIndIcon /> : <PersonIcon /> }</ListItemIcon>
+              <ListItemText primary={text} />
+            </ListItem>
+          ))}          
+        </List>
         <Divider />
         <List>
-        <Link style={{ color: '#ffffff' }} onClick={() => logout()} >
-          <ListItem button key="Sair">
-            <ListItemIcon style={{ color: '#ffffff' }}> <ExitToApp /></ListItemIcon>
-            <ListItemText primary="Sair" />
-          </ListItem>
-        </Link>
- 
+          <Link style={{ color: '#ffffff' }} onClick={() => logout()}>
+          {[ 'Sair'].map((text, index) => (
+            <ListItem button key={text}>
+              <ListItemIcon>{index % 2 === 0 ? <ExitToApp /> : <ExitToApp />}</ListItemIcon>
+              <ListItemText primary={text} />
+            </ListItem>
+          
+          ))}
+          </Link>  
     </List>
       </Drawer>
       <main className={classes.content}>

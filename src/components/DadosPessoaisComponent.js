@@ -136,11 +136,11 @@ export default function MultilineTextFields() {
       <Paper className={classes.paper}>
 
 
-        <Grid container xs={12} spacing={1}>
-          <Grid item xs={12} imagem className={classes.imagem}>
-            <img class="displayed" src={logo} alt={"logo"} />
+        <Grid container  spacing={1}>
+          <Grid item xs={12}  className={classes.imagem}>
+            <img  src={logo} alt={"logo"} />
           </Grid>
-          <Grid item xs={12} spacing={1}>
+          <Grid item xs={12}>
             <Grid item xs={12}>
               <Typography variant="h4" component="h5">
                 Cadastrar Dados
@@ -148,21 +148,21 @@ export default function MultilineTextFields() {
             </Grid>
           </Grid>
 
-          <Grid container xs={12} spacing={1}>
+          <Grid container spacing={1}>
 
-            <Grid item xs={6} spacing={1}>
+            <Grid item xs={6} >
               <TextField fullWidth={true} id="nome" label="Nome Completo" name="nome"
                 onChange={(e) => setNome(e.target.value)}
                 value={Nome}
                 autoComplete='off' />
             </Grid>
-            <Grid item xs={6} spacing={1}>
+            <Grid item xs={6} >
               <TextField fullWidth={true} id="rg" label="RG" name="rg"
                 onChange={(e) => setRg(e.target.value)}
                 value={Rg} />
             </Grid>
           </Grid>
-          <Grid container xs={12} spacing={1}>
+          <Grid container  >
             <Grid item xs={6}>
               <TextField fullWidth={true} id="cpf" label="CPF" name="cpf"
                 onChange={(e) => setCpf(e.target.value)}
@@ -183,7 +183,7 @@ export default function MultilineTextFields() {
             </Grid>
           </Grid>
 
-          <Grid container xs={12} spacing={1}>
+          <Grid container  spacing={1}>
             <Grid item xs={6}>
               <TextField fullWidth={true} id="telefone" label="Telefone" name="telefone"
                 onChange={(e) => setTelefone(e.target.value)}
@@ -198,7 +198,7 @@ export default function MultilineTextFields() {
             </Grid>
           </Grid>
 
-          <Grid container xs={12} spacing={1}>
+          <Grid container spacing={1}>
             <Grid item xs={12}>
               <TextField fullWidth={true} id="email" label="E-mail" name="email"
                 onChange={(e) => setEmail(e.target.value)}
@@ -207,7 +207,7 @@ export default function MultilineTextFields() {
             </Grid>
           </Grid>
 
-          <Grid container xs={12} spacing={1}>
+          <Grid container spacing={1}>
 
             <Grid item xs={12}>
               <TextField
@@ -226,7 +226,7 @@ export default function MultilineTextFields() {
                   </option>))}</TextField>
             </Grid>
           </Grid>
-          <Grid container xs={12} spacing={1}>
+          <Grid container spacing={1}>
             <   Grid item xs={6}>
               <FormControl component="fieldset">
                 <FormLabel component="legend">Possui Habilitação</FormLabel>

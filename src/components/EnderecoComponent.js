@@ -41,6 +41,10 @@ function App() {
         setFieldValue('bairro', data.bairro);
         setFieldValue('cidade', data.localidade);
         setFieldValue('uf', data.uf);
+        setLogradouro(data.logradouro);
+        setbairro(data.bairro);
+        setcidade(data.localidade);
+        setuf(data.uf);
       });
   }
   
@@ -79,20 +83,9 @@ function App() {
 }));
 
 const classes = useStyles();
-const [Nome, setNome] = useState('');
-const [Cpf, setCpf] = useState('');
-const [Rg, setRg] = useState('');
-const [Genero, setgenero] = useState('');
-const [Nascimento, setnascimento] = useState('');
-const [Telefone, settelefone] = useState('');
-const [Telefone2, settelefone2] = useState('');
-const [Email, setemail] = useState('');
-const [Profissao, setprofissao] = useState('');
-const [Estadocivi, setestadocivi] = useState('');
-const [PossuiVeiculo, setpossuiVeiculo] = useState('');
-const [PossuiHabilitacao, setpossuiHabilitacao] = useState('');
+
 const [cep, setcep] = useState('');
-const [logradouro, setlogradouro] = useState('');
+const [logradouro, setLogradouro] = useState('');
 const [numero, setnumero] = useState('');
 const [complemento, setcomplemento] = useState('');
 const [bairro, setbairro] = useState('');
@@ -103,12 +96,19 @@ async function handleSignIn(e) {
   e.preventDefault();
   localStorage.clear();
 
+  console.log(logradouro);
+  console.log(cidade);
+  console.log(uf);
+
   if (cep === '' || logradouro === '' || numero === '' || bairro === '' || cidade === '' || uf === '' ) {
       setError('Preencha todos os campos para continuar.')
   } else { 
       setError('')
       try {
+       
+        
           axios.post("/Endereco/", {
+           
             cep,
             logradouro,
             numero,
@@ -151,15 +151,15 @@ async function handleSignIn(e) {
         render={({ isValid, setFieldValue }) => (
         <form onSubmit={handleSignIn}>
         <Paper className={classes.paper}>
-            <Grid container xs={12} spacing={1}>
+            <Grid item xs={12} spacing={1}>
 
-            <Grid container xs={12} spacing={1}>
+            <Grid item xs={12} spacing={1}>
               <Grid item xs={12}  imagem className={classes.imagem}>
                 <img class="displayed" src={logo} alt={"logo"} /> 
               </Grid>
             </Grid> 
            
-            <Grid container xs={12} spacing={1}>   
+            <Grid item xs={12} spacing={1}>   
             <Grid  item xs={12}>
               <Typography variant="h4" component="h5">
                  Endereço
@@ -168,43 +168,43 @@ async function handleSignIn(e) {
             </Grid>
             <div><br></br></div>
           
-             <Grid container xs={12} spacing={1}>   
+             <Grid item xs={12} spacing={1}>   
               <Grid  item xs={12} fullWidth={true}> 
                   <LocationOnIcon/><TextField name="cep" type="text" label="CEP"  onBlur={(ev) => onBlurCep(ev, setFieldValue)} />
               </Grid>
              </Grid>
 
-             <Grid container xs={12} spacing={1}>   
+             <Grid item xs={12} spacing={1}>   
               <Grid  item xs={12}>  
-                <MyLocationIcon/> <Field name="logradouro" label="Logradouro"   type="text" />  
+                <MyLocationIcon/> <Field name="logradouro" value={logradouro} label="Logradouro" type="text" />  
               </Grid>
             </Grid>
 
-              <Grid container xs={12} spacing={1}>   
+              <Grid item xs={12} spacing={1}>   
                <Grid  item xs={12}>  
                 <Filter5Icon/> <Field  name="numero" label="Número" type="text" />
               </Grid>
             </Grid>
 
-              <Grid container xs={12} spacing={1}>   
+              <Grid item xs={12} spacing={1}>   
                 <Grid  item xs={12}>  
                 <PinDropIcon/><Field name="complemento" label="Complemento"   type="text" />
                  </Grid>
             </Grid>
 
-                 <Grid container xs={12} spacing={1}>   
+                 <Grid item xs={12} spacing={1}>   
               <Grid  item xs={12}>  
                 <StreetviewIcon/><Field name="bairro" label="Bairro"  type="text" />
                  </Grid>
             </Grid>
             
-                 <Grid container xs={12} spacing={1}>   
+                 <Grid item xs={12} spacing={1}>   
               <Grid  item xs={12}>  
                 <LocationCityIcon/><Field name="cidade" label="Cidade"   type="text" />
                  </Grid>
             </Grid>
 
-                 <Grid container xs={12} spacing={1}>   
+                 <Grid item xs={12} spacing={1}>   
               <Grid  item xs={12}>  
                 <LocalLibraryIcon/><Field name="uf" label="Estado"   type="text" />
                  </Grid>
@@ -213,14 +213,14 @@ async function handleSignIn(e) {
             </Grid>
            
             <Grid item xs={12} className={classes.paper} >
-          <a href='http://localhost:3000/portal/home'>
+          
             <Button  
               type="submit"
               fullWidth                    
               variant="contained"
               color="primary">
               AVANÇAR
-            </Button></a>
+            </Button>
             </Grid>
                   </Paper>
          </form>  

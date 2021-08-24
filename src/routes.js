@@ -10,6 +10,7 @@ import EnderecoPage          from "./pages/EnderecoPage"
 import DadosPessoaisPage     from "./pages/DadosPessoaisPage"
 import recuperarSenhaPage    from "./pages/recuperarSenhaPage"
 import CurriculoPage         from "./pages/CurriculoPage"
+import HomeAdminPage         from "./pages/HomeAdminPage"
 
 const Routes = ()=>(
     <BrowserRouter>
@@ -23,6 +24,7 @@ const Routes = ()=>(
             <Route exact path="/portal/cadastroUsuario" component={cadastroUsuarioPage} />
             <Route exact path="/portal/recuperar" component={recuperarSenhaPage} />
             <Route exact path="/portal/curriculo" component={CurriculoPage} />
+            <Route exact path="/portal/admin" component={HomeAdminPage} />
             <Route path="*"> <Redirect to="/portal/login" /> </Route>
         </Switch>
     </BrowserRouter>

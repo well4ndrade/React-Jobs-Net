@@ -7,7 +7,7 @@ import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import axios from "axios";
+import api from '../services/apiService';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -78,11 +78,10 @@ export default function AcessoSistema() {
         } else {
             setError('')
             try {
-                axios.post("/Dados/Login", {
+                api.post("/Dados/Login", {
                     Login,
                     Passwd
                 }).then(function(response) {
-                    console.log(response)
                     localStorage.setItem('@login', Login)
                     localStorage.setItem('@idusuario', response.data.id)
                     window.location.href = "/portal/home";
@@ -176,10 +175,10 @@ export default function AcessoSistema() {
                         Recuperar Senha
                     </Button>
 
-                    {error && <p>{error}</p>}
+                    
                     <Grid container>
                         <Grid item xs>
-
+                        {error && <p>{error}</p>}
                         </Grid>
                     </Grid>
                 </form>
