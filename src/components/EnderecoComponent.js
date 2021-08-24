@@ -14,10 +14,13 @@ import Filter5Icon from '@material-ui/icons/Filter5';
 import LocalLibraryIcon from '@material-ui/icons/LocalLibrary';
 import PinDropIcon from '@material-ui/icons/PinDrop';
 import StreetviewIcon from '@material-ui/icons/Streetview';
-import MiniDrawer from '../components/MenuComponent.js';
 import axios from "axios";
 
 function App() {
+
+ 
+
+
     function onSubmit(values, actions) {
       console.log('SUBMIT', values);
     }
@@ -43,7 +46,6 @@ function App() {
         setCidade(data.localidade);
         setUf(data.uf);
         setCep(data.cep);
-     
       });
   }
   
@@ -91,7 +93,7 @@ const [estado, setUf] = useState('');
 const [error, setError] = useState('');
 async function handleSignIn(e) {
   e.preventDefault();
-
+  
   const usuarioId = localStorage.getItem('@idusuario');
 
   console.log(cep);
@@ -102,37 +104,33 @@ async function handleSignIn(e) {
   console.log(estado);
   console.log(usuarioId);
 
-
-  
-
   if (cep === '' || logradouro === '' || numero === '' || bairro === '' || cidade === '' || estado === '' ) {
       setError('Preencha todos os campos para continuar.')
   } else { 
       setError('')
-      try {      
-        
-          axios.post("https://localhost:5001/Enderecos", {
-            cep,
-            logradouro,
-            numero,
-            bairro,
-            cidade,
-            estado,
-            usuarioId
-            
-          }).then(function(response) {
-            console.log('Cadastrado');  
-            window.location.href = "/portal/home";            
+      try {
+        axios.post("https://localhost:5001/Enderecos", {
+          cep,
+          logradouro,
+          numero,
+          bairro,
+          cidade,
+          estado,
+          usuarioId
+          
+        }).then(function(response) {
+          console.log('Cadastrado');  
+          window.location.href = "/portal/home";            
 
-          }).catch(function (error) {
-            console.log('Erro ao concluir cadastro. Verifique o prenchumento dos campos.');
-            
-          });
-      } catch (error) {
-         
-      }
-  
-  setError("Os campos não foram totalmente preenchidos.");
+        }).catch(function (error) {
+          console.log('Erro ao concluir cadastro. Verifique o prenchumento dos campos.');
+          
+        });
+    } catch (error) {
+       
+    }
+
+setError("Os campos não foram totalmente preenchidos.");
 
 }
 } 
@@ -154,15 +152,15 @@ async function handleSignIn(e) {
         render={({ isValid, setFieldValue }) => (
         <form onSubmit={handleSignIn}>
         <Paper className={classes.paper}>
-            <Grid item xs={12} spacing={1}>
+            <Grid container xs={12} spacing={1}>
 
-            <Grid item xs={12} spacing={1}>
+            <Grid container xs={12} spacing={1}>
               <Grid item xs={12}  imagem className={classes.imagem}>
                 <img class="displayed" src={logo} alt={"logo"} /> 
               </Grid>
-            </Grid>
+            </Grid> 
            
-            <Grid item xs={12} spacing={1}>   
+            <Grid container xs={12} spacing={1}>   
             <Grid  item xs={12}>
               <Typography variant="h4" component="h5">
                  Endereço
@@ -171,38 +169,38 @@ async function handleSignIn(e) {
             </Grid>
             <div><br></br></div>
           
-             <Grid item xs={12} spacing={1}>   
+             <Grid container xs={12} spacing={1}>   
               <Grid  item xs={12} fullWidth={true}> 
-                  <LocationOnIcon/><Field name="cep" type="text" label="CEP"  onBlur={(ev) => onBlurCep(ev, setFieldValue)} />
+                  <LocationOnIcon/><TextField name="cep" type="text" label="CEP"  onBlur={(ev) => onBlurCep(ev, setFieldValue)} />
               </Grid>
              </Grid>
 
-             <Grid item xs={12} spacing={1}>   
+             <Grid container xs={12} spacing={1}>   
               <Grid  item xs={12}>  
-                <MyLocationIcon/> <Field name="logradouro" label="Logradouro"/>
+                <MyLocationIcon/> <Field name="logradouro" label="Logradouro"   type="text" />  
               </Grid>
             </Grid>
 
-              <Grid item xs={12} spacing={1}>   
+              <Grid container xs={12} spacing={1}>   
                <Grid  item xs={12}>  
-                <Filter5Icon/> <Field  name="value" label="Número" type="text" onChange={(e) => setNumero(e.target.value)} />
-             </Grid>
+                <Filter5Icon/> <Field  name="numero" label="Número" type="text" />
+              </Grid>
             </Grid>
 
 
-                 <Grid item xs={12} spacing={1}>   
+                 <Grid container xs={12} spacing={1}>   
               <Grid  item xs={12}>  
                 <StreetviewIcon/><Field name="bairro" label="Bairro"  type="text" />
                  </Grid>
             </Grid>
             
-                 <Grid item xs={12} spacing={1}>   
+                 <Grid container xs={12} spacing={1}>   
               <Grid  item xs={12}>  
                 <LocationCityIcon/><Field name="cidade" label="Cidade"   type="text" />
                  </Grid>
             </Grid>
 
-                 <Grid item xs={12} spacing={1}>   
+                 <Grid container xs={12} spacing={1}>   
               <Grid  item xs={12}>  
                 <LocalLibraryIcon/><Field name="estado" label="Estado"   type="text" />
                  </Grid>
