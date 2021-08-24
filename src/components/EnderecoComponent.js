@@ -37,7 +37,7 @@ function App() {
         setFieldValue('logradouro', data.logradouro);
         setFieldValue('bairro', data.bairro);
         setFieldValue('cidade', data.localidade);
-        setFieldValue('uf', data.uf);
+        setFieldValue('estado', data.uf);
         setLogradouro(data.logradouro);
         setBairro(data.bairro);
         setCidade(data.localidade);
@@ -85,48 +85,47 @@ const classes = useStyles();
 const [cep, setCep] = useState('');
 const [logradouro, setLogradouro] = useState('');
 const [numero, setNumero] = useState('');
-const [complemento, setComplemento] = useState('');
 const [bairro, setBairro] = useState('');
 const [cidade, setCidade] = useState('');
-const [uf, setUf] = useState('');
+const [estado, setUf] = useState('');
 const [error, setError] = useState('');
 async function handleSignIn(e) {
   e.preventDefault();
+
+  const usuarioId = localStorage.getItem('@idusuario');
+
   console.log(cep);
   console.log(logradouro);
   console.log(numero);
-  console.log(complemento);
   console.log(bairro);
   console.log(cidade);
-  console.log(uf);
-  localStorage.clear();
+  console.log(estado);
+  console.log(usuarioId);
 
-  console.log(logradouro);
-  console.log(cidade);
-  console.log(uf);
 
-  if (cep === '' || logradouro === '' || numero === '' || bairro === '' || cidade === '' || uf === '' ) {
+  
+
+  if (cep === '' || logradouro === '' || numero === '' || bairro === '' || cidade === '' || estado === '' ) {
       setError('Preencha todos os campos para continuar.')
   } else { 
       setError('')
       try {      
         
-          axios.post("/Endereco/", {
-           
+          axios.post("https://localhost:5001/Enderecos", {
             cep,
             logradouro,
             numero,
             bairro,
             cidade,
-            uf,
-            
+            estado,
+            usuarioId
             
           }).then(function(response) {
-              console.log('Cadastrado');
-              
+            console.log('Cadastrado');  
+            window.location.href = "/portal/home";            
 
           }).catch(function (error) {
-              console.log('Erro ao concluir cadastro. Verifique o prenchumento dos campos.');
+            console.log('Erro ao concluir cadastro. Verifique o prenchumento dos campos.');
             
           });
       } catch (error) {
@@ -150,7 +149,7 @@ async function handleSignIn(e) {
           complemento: '',
           bairro: '',
           cidade: '',
-          uf: '',
+          estado: '',
         }}
         render={({ isValid, setFieldValue }) => (
         <form onSubmit={handleSignIn}>
@@ -190,11 +189,6 @@ async function handleSignIn(e) {
              </Grid>
             </Grid>
 
-              <Grid item xs={12} spacing={1}>   
-                <Grid  item xs={12}>  
-                <PinDropIcon/><Field name="value" label="Complemento"   type="text" onChange={(e) => setComplemento(e.target.value)}/>
-                 </Grid>
-            </Grid>
 
                  <Grid item xs={12} spacing={1}>   
               <Grid  item xs={12}>  
@@ -210,7 +204,7 @@ async function handleSignIn(e) {
 
                  <Grid item xs={12} spacing={1}>   
               <Grid  item xs={12}>  
-                <LocalLibraryIcon/><Field name="uf" label="Estado"   type="text" />
+                <LocalLibraryIcon/><Field name="estado" label="Estado"   type="text" />
                  </Grid>
             </Grid>
 
