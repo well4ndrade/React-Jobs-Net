@@ -14,13 +14,10 @@ import Filter5Icon from '@material-ui/icons/Filter5';
 import LocalLibraryIcon from '@material-ui/icons/LocalLibrary';
 import PinDropIcon from '@material-ui/icons/PinDrop';
 import StreetviewIcon from '@material-ui/icons/Streetview';
+import MiniDrawer from '../components/MenuComponent.js';
 import axios from "axios";
 
 function App() {
-
- 
-
-
     function onSubmit(values, actions) {
       console.log('SUBMIT', values);
     }
@@ -42,9 +39,11 @@ function App() {
         setFieldValue('cidade', data.localidade);
         setFieldValue('uf', data.uf);
         setLogradouro(data.logradouro);
-        setbairro(data.bairro);
-        setcidade(data.localidade);
-        setuf(data.uf);
+        setBairro(data.bairro);
+        setCidade(data.localidade);
+        setUf(data.uf);
+        setCep(data.cep);
+     
       });
   }
   
@@ -83,17 +82,23 @@ function App() {
 }));
 
 const classes = useStyles();
-
-const [cep, setcep] = useState('');
+const [cep, setCep] = useState('');
 const [logradouro, setLogradouro] = useState('');
-const [numero, setnumero] = useState('');
-const [complemento, setcomplemento] = useState('');
-const [bairro, setbairro] = useState('');
-const [cidade, setcidade] = useState('');
-const [uf, setuf] = useState('');
+const [numero, setNumero] = useState('');
+const [complemento, setComplemento] = useState('');
+const [bairro, setBairro] = useState('');
+const [cidade, setCidade] = useState('');
+const [uf, setUf] = useState('');
 const [error, setError] = useState('');
 async function handleSignIn(e) {
   e.preventDefault();
+  console.log(cep);
+  console.log(logradouro);
+  console.log(numero);
+  console.log(complemento);
+  console.log(bairro);
+  console.log(cidade);
+  console.log(uf);
   localStorage.clear();
 
   console.log(logradouro);
@@ -115,21 +120,21 @@ async function handleSignIn(e) {
             bairro,
             cidade,
             uf,
-            "pais" : "Brasil",
+            
             
           }).then(function(response) {
               console.log('Cadastrado');
               
 
           }).catch(function (error) {
-              console.log('Usuario já existe');
+              console.log('Erro ao concluir cadastro. Verifique o prenchumento dos campos.');
             
           });
       } catch (error) {
          
       }
   
-  setError("As senhas não conferem.");
+  setError("Os campos não foram totalmente preenchidos.");
 
 }
 } 
@@ -157,7 +162,7 @@ async function handleSignIn(e) {
               <Grid item xs={12}  imagem className={classes.imagem}>
                 <img class="displayed" src={logo} alt={"logo"} /> 
               </Grid>
-            </Grid> 
+            </Grid>
            
             <Grid item xs={12} spacing={1}>   
             <Grid  item xs={12}>
@@ -170,25 +175,25 @@ async function handleSignIn(e) {
           
              <Grid item xs={12} spacing={1}>   
               <Grid  item xs={12} fullWidth={true}> 
-                  <LocationOnIcon/><TextField name="cep" type="text" label="CEP"  onBlur={(ev) => onBlurCep(ev, setFieldValue)} />
+                  <LocationOnIcon/><Field name="cep" type="text" label="CEP"  onBlur={(ev) => onBlurCep(ev, setFieldValue)} />
               </Grid>
              </Grid>
 
              <Grid item xs={12} spacing={1}>   
               <Grid  item xs={12}>  
-                <MyLocationIcon/> <Field name="logradouro" value={logradouro} label="Logradouro" type="text" />  
+                <MyLocationIcon/> <Field name="logradouro" label="Logradouro"/>
               </Grid>
             </Grid>
 
               <Grid item xs={12} spacing={1}>   
                <Grid  item xs={12}>  
-                <Filter5Icon/> <Field  name="numero" label="Número" type="text" />
-              </Grid>
+                <Filter5Icon/> <Field  name="value" label="Número" type="text" onChange={(e) => setNumero(e.target.value)} />
+             </Grid>
             </Grid>
 
               <Grid item xs={12} spacing={1}>   
                 <Grid  item xs={12}>  
-                <PinDropIcon/><Field name="complemento" label="Complemento"   type="text" />
+                <PinDropIcon/><Field name="value" label="Complemento"   type="text" onChange={(e) => setComplemento(e.target.value)}/>
                  </Grid>
             </Grid>
 
