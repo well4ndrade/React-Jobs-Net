@@ -58,6 +58,8 @@ const useStyles = makeStyles((theme) => ({
 export default function SpacingGrid() {
     const classes = useStyles();
     const [dadosVagas, setVagas] = useState([]);
+    const [dadosVagas1, setVagas1] = useState([]);
+    const [nome, setNome] = useState([]);
 
     async function buscaVagas() {
         try {
@@ -75,14 +77,38 @@ export default function SpacingGrid() {
         }
     }
 
+    async function buscaVagas1() {
+        try {
+
+            axios.get('/Vagas/filtro').then(response => {
+
+                setVagas1(response.data)
+
+            }).catch(function (error) {
+
+                console.log(error.config);
+            });
+
+        } catch (error) {
+        }
+    }
+
     useEffect(() => {
         buscaVagas()
     }, [])
 
-    function vagaDetalhe(nome) {
+    useEffect(() => {
+        buscaVagas1()
+    }, [])
+
+    function vagaDetalhe(id, local, nome, salario) {
+        localStorage.setItem('ID', id);
         localStorage.setItem('VAGA', nome);
-        window.location.href = `/portal/cadastro`;
+        localStorage.setItem('LOCAL', local);
+        localStorage.setItem('SALARIO', salario);
+        window.location.href = `/portal/cargos`;
     }
+
 
     return (
        
@@ -121,9 +147,10 @@ export default function SpacingGrid() {
                 </Paper>
                 <Grid item xs={12} className={classes.paper} >
                         <Button
+                            //onClick={(e)=> setNome(e.target.value)}
                             variant="contained"
                             color="primary"
-                            href="/portal/admin"
+                            href="/portal/cargos/"
                         >
                             BUSCAR
                         </Button>
@@ -131,32 +158,32 @@ export default function SpacingGrid() {
                 <Divider/>
                 <Paper>
                     <Grid container xs={12} spacing={1}>
-                        <Grid item xs={12} spacing={1} className={classes.banner}>
+                        <Grid item xs={12} spacing={1}>
                             <Grid container spacing={3}>
-                            {dadosVagas.map((option) => (
+                            {dadosVagas1.map((option1) => (
                             <Grid item xs={4} spacing={0}>
                                 <Paper
 
-                                    onClick={() => vagaDetalhe(option.id, option.local, option.nome, option.salario)}
+                                    onClick={() => vagaDetalhe(option1.id, option1.local, option1.nome, option1.salario)}
 
                                     style={{ backgroundColor: "#2aa745", textAlign: "center", fontSize: 15, color: "#FFFFFF" }}>
                                     <Typography>
                                         Vaga
                                     </Typography>
                                     <Typography>
-                                        {option.nome}
+                                        {option1.nome}
                                     </Typography>
                                     <Typography>
                                         Localidade
                                     </Typography>
                                     <Typography>
-                                        {option.local}
+                                        {option1.local}
                                     </Typography>
                                     <Typography>
                                         Salário
                                     </Typography>
                                     <Typography>
-                                        R$ {option.salario}
+                                        R$ {option1.salario}
                                     </Typography>
                                 </Paper>
                             </Grid>
@@ -172,5 +199,3 @@ export default function SpacingGrid() {
        
     );
 }
-
-
