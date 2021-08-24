@@ -173,14 +173,9 @@ export default function AcessoSistema() {
                     >
                         Retornar
                     </Button>
-                    {error && <p>{error}</p>}
-                    <Grid container>
-                        <Grid item xs>
-                        </Grid>
-                    </Grid>
                 </form>
+                {error && <p>{error}</p>}
             </Grid>
-
         </Grid>
     );
 }

@@ -128,12 +128,10 @@ export default function CadastroComponent() {
         
           try {
          api.post('/Vagas',{
-
               nome,
               local,
               descricao,
               salario
-
             }).then(function(response) {
             setRetorno(response.data)
               window.location.href = "/portal/cadastro";

@@ -75,7 +75,6 @@ export default function SpacingGrid() {
         }
     }
 
-
     async function buscaVagas1() {
         try {
             axios.get('/Vagas/filtro').then(response => {
@@ -101,7 +100,7 @@ export default function SpacingGrid() {
         buscaVagas1()
     }, [])
 
-    function vagaEscolhida(vaga){
+    function vagaEscolhida(vaga) {
         console.log(vaga)
         localStorage.setItem('VAGAE', vaga);
         window.location.href = "/portal/curriculo";

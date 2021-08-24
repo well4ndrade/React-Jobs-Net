@@ -1,15 +1,10 @@
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import FaceIcon from '@material-ui/icons/Face';
 import Typography from '@material-ui/core/Typography';
-import SettingsPhoneIcon from '@material-ui/icons/SettingsPhone';
 import React, { useState, useEffect } from 'react';
-import AssignmentIcon from '@material-ui/icons/Assignment';
 import logo from '../imagens/192.png' // relative path to image 
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import EmailIcon from '@material-ui/icons/Email';
-import SettingsCellIcon from '@material-ui/icons/SettingsCell';
 import Paper from "@material-ui/core/Paper";
 import './EnderecoComponent.css';
 import Radio from '@material-ui/core/Radio';
@@ -17,9 +12,8 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
+import api from '../services/apiService';
 import axios from "axios";
-import { InputAdornment } from '@material-ui/core';
-import AccountCircle from '@material-ui/icons/AccountCircle';
 
 const useStyles = makeStyles((theme) => ({
   root:
@@ -69,8 +63,7 @@ export default function MultilineTextFields() {
   const [Nome, setNome] = useState("");
   const [Telefone, setCelular] = useState("");
   const [response, setResponse] = useState('');
-
-
+  
   const [EstadoCivil, setCivil] = React.useState('Selecionar');
 
 
@@ -83,24 +76,15 @@ export default function MultilineTextFields() {
 
   async function handleSignIn(e) {
     e.preventDefault();
-    console.log(Nome);
-    console.log(Cpf);
-    console.log(Rg);
-    console.log(Nascimento);
-    console.log(Telefone);
-    console.log(Telefone2);
-    console.log(Email);
-    console.log(EstadoCivil);
-    console.log(PossuiVeiculo);
-    console.log(PossuiHabilitacao);
-
-
+        
+    const dadoId = localStorage.getItem('@idlogin');
+   
     if (Nome === '' || Cpf === '' || Rg === '' || Nascimento === '' || Telefone === '' || Email === '' || EstadoCivil === '' || PossuiVeiculo === '' || PossuiHabilitacao === '') {
      alert('Preencha os dados obrigatorios para continuar.')
     } else {
       setError('')
       try {
-        axios.post("https://localhost:5001/Usuarios", {
+        axios.post("https://localhost:5001/Usuarios",{
           Nome,
           Cpf,
           Rg,
@@ -111,13 +95,11 @@ export default function MultilineTextFields() {
           EstadoCivil,
           PossuiVeiculo,
           PossuiHabilitacao,
-
+          dadoId
         }).then(function (response) {
-
           localStorage.setItem('@idusuario', response.data.id)
-          console.log(response);
           window.location.href = "/portal/endereco";
-
+          
         }).catch(function (error) {
           console.log(response);
           setError("Houve um problema com o login, verifique suas credenciais ou click em recuperar sua senha.");
@@ -264,8 +246,6 @@ export default function MultilineTextFields() {
       <Grid item xs={12} className={classes.paper} >
         <Button
           type="submit"
-          href="/portal/endereco"
-          fullWidth
           variant="contained"
           color="primary"
         >

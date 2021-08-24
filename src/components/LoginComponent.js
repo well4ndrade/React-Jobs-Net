@@ -83,7 +83,7 @@ export default function AcessoSistema() {
                     Passwd
                 }).then(function(response) {
                     localStorage.setItem('@login', Login)
-                    localStorage.setItem('@idusuario', response.data.id)
+                    localStorage.setItem('@idlogin', response.data.id)
                     window.location.href = "/portal/home";
 
                 }).catch(function (error) {
@@ -174,14 +174,8 @@ export default function AcessoSistema() {
                     >
                         Recuperar Senha
                     </Button>
-
-                    
-                    <Grid container>
-                        <Grid item xs>
-                        {error && <p>{error}</p>}
-                        </Grid>
-                    </Grid>
                 </form>
+                {error && <p>{error}</p>}
             </Grid>
 
         </Grid>

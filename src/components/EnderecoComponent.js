@@ -109,8 +109,7 @@ async function handleSignIn(e) {
       setError('Preencha todos os campos para continuar.')
   } else { 
       setError('')
-      try {
-       
+      try {      
         
           axios.post("/Endereco/", {
            
