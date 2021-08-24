@@ -7,6 +7,7 @@ import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import Typography from '@material-ui/core/Typography';
 import axios from "axios";
+import logo from '../imagens/192.png'
 import Button from '@material-ui/core/Button';
 import Divider from '@material-ui/core/Divider';
 import Box from '@material-ui/core/Box';
@@ -22,6 +23,7 @@ const useStyles = makeStyles((theme) => ({
         botao: {
             flexGrow: 1,
             itemAlign: 'center',
+         
         },
     },
     textField: {
@@ -37,11 +39,13 @@ const useStyles = makeStyles((theme) => ({
         flexGrow: 1,
         marginTop: 30,
         textAlign: 'center',
+        color:'black'
     },
     subtitulo: {
         flexGrow: 1,
         marginTop: 30,
         textAlign: 'center',
+        color:'black'
     },
     banner: {
         flexGrow: 1,
@@ -116,6 +120,11 @@ export default function SpacingGrid() {
             noValidate
             autoComplete="off">
             <Paper className={classes.paper}>
+                <Grid container xs={12} spacing={1}>
+                    <Grid item xs={12} imagem className={classes.imagem}>
+                        <img class="displayed" src={logo} alt={"logo"} />
+                    </Grid>
+                </Grid>
                 <Grid container spacing={1} >
                     <Grid item xs={12}>
                         <Typography variant="h4" component="h4" className={classes.titulo}>
@@ -128,6 +137,7 @@ export default function SpacingGrid() {
                         </Typography>
                     </Grid>
                 </Grid>
+             
 
                 <Grid item xs={12}>
                     <Autocomplete
@@ -145,8 +155,9 @@ export default function SpacingGrid() {
                 <Button
                     //onClick={(e)=> setNome(e.target.value)}
                     variant="contained"
-                    color="primary"
+                    color="Primary"
                     href="/portal/cargos/"
+                    fullWidth={true}
                 >
                     BUSCAR
                 </Button>
@@ -163,7 +174,7 @@ export default function SpacingGrid() {
 
                                 onClick={() => vagaDetalhe(option1.id, option1.local, option1.nome, option1.salario)}
 
-                                style={{ backgroundColor: "#2aa745", textAlign: "center", fontSize: 15, color: "#FFFFFF" }}>
+                                style={{ backgroundColor: "#Primary", textAlign: "center", fontSize: 15, color: "#FFFFFF" }}>
                                 <Typography>
                                     Vaga
                                 </Typography>
