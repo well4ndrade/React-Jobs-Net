@@ -5,9 +5,10 @@ import TextField from '@material-ui/core/TextField';
 import Button from "@material-ui/core/Button";
 import { Grid } from '@material-ui/core';
 import api from '../services/apiService';
+import logo from '../imagens/192.png'
 import MUIDataTable from "mui-datatables";
 import LinearProgress from '@material-ui/core/LinearProgress';
-
+import AssignmentIcon from '@material-ui/icons/Assignment';
 
 const useStyles = makeStyles((theme) => ({
     root:
@@ -167,21 +168,25 @@ export default function CadastroComponent() {
             onSubmit={cadastraVagas}>
             <Paper className={classes.paper}>
                 <Grid container xs={12} spacing={1}>
-
+                    <Grid container xs={12} spacing={1}>
+                        <Grid item xs={12} imagem className={classes.imagem}>
+                            <img class="displayed" src={logo} alt={"logo"} />
+                        </Grid>
+                    </Grid>
                     <Grid item xs={6}>
-                        <TextField fullWidth={true} id="nome" label="Nome" onChange={(e) => setNome(e.target.value)} />
+                    <TextField fullWidth={true} id="nome" label="Nome" onChange={(e) => setNome(e.target.value)} />
                     </Grid>
                     <Grid item xs={6}>
                         <TextField fullWidth={true} id="local" label="Local" onChange={(e) => setLocal(e.target.value)} />
                     </Grid>
                 <Grid container xs={12} spacing={1}>
                     <Grid item xs={12}>
-                        <TextField fullWidth={true} id="descricao" label="Descricao" onChange={(e) => setDescricao(e.target.value)} />
+                        <TextField fullWidth={true} id="descricao" label="Descriçao" onChange={(e) => setDescricao(e.target.value)} />
                     </Grid>
                 </Grid>
                 <Grid container xs={12} spacing={1}>
                     <Grid item xs={4}>
-                        <TextField fullWidth={true} id="salario" label="Salario" onChange={(e) => setSalario(e.target.value)} />
+                        <TextField fullWidth={true} id="salario" label="Salário" onChange={(e) => setSalario(e.target.value)} />
                     </Grid>
 
                 </Grid>
@@ -195,11 +200,11 @@ export default function CadastroComponent() {
             
             <Grid item xs={12} className={classes.paper} >
             <Button                       
-                            style={{ backgroundColor: "#2aa745", fontSize: 15, color: "#FFFFFF" }}
+                            style={{ backgroundColor: "#primary", fontSize: 15, color: "#FFFFFF" }}
                             type="submit"
                             variant="contained"
                             color="primary"
-                            fullWidth={false}>
+                            fullWidth={true}>
                             CADASTRAR VAGAS
             </Button>
             </Grid>

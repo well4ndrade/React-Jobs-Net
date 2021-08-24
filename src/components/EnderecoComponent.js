@@ -14,8 +14,8 @@ import Filter5Icon from '@material-ui/icons/Filter5';
 import LocalLibraryIcon from '@material-ui/icons/LocalLibrary';
 import PinDropIcon from '@material-ui/icons/PinDrop';
 import StreetviewIcon from '@material-ui/icons/Streetview';
-import MiniDrawer from '../components/MenuComponent.js';
 import axios from "axios";
+
 
 function App() {
     function onSubmit(values, actions) {
@@ -162,71 +162,74 @@ async function handleSignIn(e) {
                 <img class="displayed" src={logo} alt={"logo"} /> 
               </Grid>
             </Grid>
+            <div><br></br></div>
            
             <Grid item xs={12} spacing={1}>   
             <Grid  item xs={12}>
               <Typography variant="h4" component="h5">
-                 Endereço
+                 Dados de Endereço
               </Typography>
               </Grid>
             </Grid>
+           
             <div><br></br></div>
           
              <Grid item xs={12} spacing={1}>   
               <Grid  item xs={12} fullWidth={true}> 
-                  <LocationOnIcon/><Field name="cep" type="text" label="CEP"  onBlur={(ev) => onBlurCep(ev, setFieldValue)} />
+                  <LocationOnIcon/><h7>CEP</h7><br></br> <Field name="cep" type="text" label="CEP"  onBlur={(ev) => onBlurCep(ev, setFieldValue)} />
               </Grid>
              </Grid>
 
              <Grid item xs={12} spacing={1}>   
               <Grid  item xs={12}>  
-                <MyLocationIcon/> <Field name="logradouro" label="Logradouro"/>
+                <MyLocationIcon/><h7>Logradouro</h7><br></br> <Field name="logradouro" label="Logradouro"/>
               </Grid>
             </Grid>
 
               <Grid item xs={12} spacing={1}>   
                <Grid  item xs={12}>  
-                <Filter5Icon/> <Field  name="value" label="Número" type="text" onChange={(e) => setNumero(e.target.value)} />
+                <Filter5Icon/><h7>Número</h7><br></br> <Field  name="value" label="Número" type="text" onChange={(e) => setNumero(e.target.value)} />
              </Grid>
             </Grid>
 
               <Grid item xs={12} spacing={1}>   
                 <Grid  item xs={12}>  
-                <PinDropIcon/><Field name="value" label="Complemento"   type="text" onChange={(e) => setComplemento(e.target.value)}/>
+                <PinDropIcon/><h7>Complemento</h7><br></br> <Field name="value" label="Complemento"   type="text" onChange={(e) => setComplemento(e.target.value)}/>
                  </Grid>
             </Grid>
 
                  <Grid item xs={12} spacing={1}>   
               <Grid  item xs={12}>  
-                <StreetviewIcon/><Field name="bairro" label="Bairro"  type="text" />
+                <StreetviewIcon/><h7>Bairro</h7><br></br> <Field name="bairro" label="Bairro"  type="text" />
                  </Grid>
             </Grid>
             
                  <Grid item xs={12} spacing={1}>   
               <Grid  item xs={12}>  
-                <LocationCityIcon/><Field name="cidade" label="Cidade"   type="text" />
+                <LocationCityIcon/><h7>Cidade</h7><br></br> <Field name="cidade" label="Cidade"   type="text" />
                  </Grid>
             </Grid>
 
                  <Grid item xs={12} spacing={1}>   
               <Grid  item xs={12}>  
-                <LocalLibraryIcon/><Field name="uf" label="Estado"   type="text" />
+                <LocalLibraryIcon/><h7>Estado</h7><br></br> <Field name="uf" label="Estado"   type="text" />
                  </Grid>
             </Grid>
 
             </Grid>
-           
+            </Paper>
             <Grid item xs={12} className={classes.paper} >
           
             <Button  
               type="submit"
-              fullWidth                    
+              fullWidth={true}                
               variant="contained"
               color="primary">
-              AVANÇAR
+
+              CONCLUIR CADASTRO
             </Button>
             </Grid>
-                  </Paper>
+                 
          </form>  
         
         )}
