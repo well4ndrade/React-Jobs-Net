@@ -1,254 +1,283 @@
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import FaceIcon from '@material-ui/icons/Face';
-import DriveEtaIcon from '@material-ui/icons/DriveEta';
 import Typography from '@material-ui/core/Typography';
 import SettingsPhoneIcon from '@material-ui/icons/SettingsPhone';
-import DateRangeIcon from '@material-ui/icons/DateRange';
-import WcIcon from '@material-ui/icons/Wc';
 import React, { useState, useEffect } from 'react';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import logo from '../imagens/192.png' // relative path to image 
 import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import EmailIcon from '@material-ui/icons/Email';
 import SettingsCellIcon from '@material-ui/icons/SettingsCell';
 import Paper from "@material-ui/core/Paper";
 import './EnderecoComponent.css';
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormControl from '@material-ui/core/FormControl';
+import FormLabel from '@material-ui/core/FormLabel';
+import axios from "axios";
+import { InputAdornment } from '@material-ui/core';
+import AccountCircle from '@material-ui/icons/AccountCircle';
 
 const useStyles = makeStyles((theme) => ({
   root:
   {
-      flexGrow: 1,
+    flexGrow: 1,
   },
   paper: {
-      padding: theme.spacing(1),
-      textAlign: 'center',
-      color: theme.palette.text.secondary,
-  botao: {
+    padding: theme.spacing(2),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+    botao: {
       flexGrow: 1,
       itemAlign: 'center',
-  },
+    },
   },
   textField: {
-      width: '40ch',
-      marginLeft: 'auto',
-      marginRight: 'auto',
-      paddingBottom: 0,
-      marginTop: 0,
-      fontWeight: 500,
-      textalign: 'center',
+    width: '100%',
+    height: '100%',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    paddingBottom: 0,
+    marginTop: 0,
+    fontWeight: 500
   }
-  ,
-  imagem: {
-    itemAlign: 'center',
-  },
-  input: {
 
-    width: '30%'
-  }
-  
 }));
 
+const estadoCivil = [
+  { label: 'Selecionar', },
+  { label: 'Solteiro(a)', },
+  { label: 'Casado(a)', },
+  { label: 'Divorciado(a)', },
+  { label: 'Viúvo(a)', },
+];
 
-const generos = [
-    {label: 'Selecionar',},
-    {label: 'Feminino',},
-    {label: 'Masculino', },
-    {label: 'Prefiro não dizer', }, 
-  ];
 
-  const estadocivil = [
-    {label: 'Selecionar',},
-    {label: 'Solteiro(a)',},
-    {label: 'Casado(a)',},
-    {label: 'Divorciado(a)',},
-    {label: 'Viúvo(a)',},
-   ]; 
+export default function MultilineTextFields() {
+  const classes = useStyles();
+  const [Cpf, setCpf] = useState('');
+  const [Rg, setRg] = useState('');
+  const [Nascimento, setNascimento] = useState('');
+  const [Telefone2, setTelefone] = useState('');
+  const [Email, setEmail] = useState('');
+  const [PossuiVeiculo, setVeiculo] = useState('');
+  const [PossuiHabilitacao, setHabilitacao] = useState('');
+  const [error, setError] = useState('');
+  const [Nome, setNome] = useState("");
+  const [Telefone, setCelular] = useState("");
+  const [response, setResponse] = useState('');
 
-  
-  export default function MultilineTextFields() {
-    const classes = useStyles();
-    const [nome, setNome] = useState('');
-    const [cpf, setCpf] = useState('');
-    const [rg, setRg] = useState('');
-    const [nascimento, setNascimento] = useState('');
-    const [telefone, setTelefone] = useState('');
-    const [telefone2, setTelefone2] = useState('');
-    const [email, setEmail] = useState('');
-    const [profissao, setProfissao] = useState('');
-    const [possuiVeiculo, setPossuiVeiculo] = useState('');
-    const [possuiHabilitacao, setPossuiHabilitacao] = useState('');
-    const [error, setError] = useState('');
-  
-    useEffect(() => { console.log("Deu erro") }, [error])
-   
 
-    
-    const [genero, setgenero] = React.useState('Selecionar');
-    const handleChange = (event) => {
-      setgenero(event.target.value);
-    };
-    const [estadocivi, setestadocivi] = React.useState('Selecionar'); 
-    const handleCivil = (event) => {
-        setestadocivi(event.target.value);
-    };
+  const [EstadoCivil, setCivil] = React.useState('Selecionar');
 
-    localStorage.setItem('@nome', nome)
-    localStorage.setItem('@cpf', cpf)
-    localStorage.setItem('@rg', rg)
-    localStorage.setItem('@genero', genero)
-    localStorage.setItem('@nascimento', nascimento)
-    localStorage.setItem('@telefone', telefone)
-    localStorage.setItem('@telefone2', telefone2)
-    localStorage.setItem('@email', email)
-    localStorage.setItem('@profissao', profissao)
-    localStorage.setItem('@estadocivi', estadocivi)
-    localStorage.setItem('@possuiVeiculo', possuiVeiculo)
-    localStorage.setItem('@possuiHabilitacao', possuiHabilitacao)
+
+  const handleVChange = (event) => {
+    setVeiculo(event.target.value);
+  };
+  const handleChange = (event) => {
+    setHabilitacao(event.target.value);
+  };
+
+  async function handleSignIn(e) {
+    e.preventDefault();
+    console.log(Nome);
+    console.log(Cpf);
+    console.log(Rg);
+    console.log(Nascimento);
+    console.log(Telefone);
+    console.log(Telefone2);
+    console.log(Email);
+    console.log(EstadoCivil);
+    console.log(PossuiVeiculo);
+    console.log(PossuiHabilitacao);
+
+
+    if (Nome === '' || Cpf === '' || Rg === '' || Nascimento === '' || Telefone === '' || Email === '' || EstadoCivil === '' || PossuiVeiculo === '' || PossuiHabilitacao === '') {
+     alert('Preencha os dados obrigatorios para continuar.')
+    } else {
+      setError('')
+      try {
+        axios.post("https://localhost:5001/Usuarios", {
+          Nome,
+          Cpf,
+          Rg,
+          Nascimento,
+          Telefone,
+          Telefone2,
+          Email,
+          EstadoCivil,
+          PossuiVeiculo,
+          PossuiHabilitacao,
+
+        }).then(function (response) {
+
+          localStorage.setItem('@idusuario', response.data.id)
+          console.log(response);
+          window.location.href = "/portal/endereco";
+
+        }).catch(function (error) {
+          console.log(response);
+          setError("Houve um problema com o login, verifique suas credenciais ou click em recuperar sua senha.");
+
+        });
+      } catch (error) {
+        setError("Houve um problema com o login, verifique suas credenciais ou entre em contato com o T.I.");
+      }
+    }
+  }
 
 
   return (
 
-    <form id="form" name="form" className={classes.root} noValidate  autoComplete="off">
-    <Paper className={classes.paper}>
-        <Grid container xs={12} spacing={1}>
+    <form id="form" name="form" className={classes.root} onSubmit={handleSignIn} noValidate autoComplete="off">
+      <Paper className={classes.paper}>
+
 
         <Grid container xs={12} spacing={1}>
-          <Grid item xs={12}  imagem className={classes.imagem}>
-            <img class="displayed" src={logo} alt={"logo"} /> 
+          <Grid item xs={12} imagem className={classes.imagem}>
+            <img class="displayed" src={logo} alt={"logo"} />
           </Grid>
-        </Grid>  
-
-        <Grid container xs={12} spacing={1}> 
-          <Grid  item xs={12}>
-          <Typography variant="h4" component="h5">
-            Cadastrar Dados
-            <div><br></br></div>
-          </Typography>
-          </Grid>
-        </Grid>
-
-        <Grid container xs={12} spacing={1}>  
-          <Grid  item xs={12}>        
-            <FaceIcon /><TextField required id="nome" label="Nome Completo" name="nome"onChange={(e)=> setNome(e.target.value)}/> 
-          </Grid>
-        </Grid>
-
-        <Grid container xs={12} spacing={1}> 
-          <Grid  item xs={12}>  
-            <AssignmentIcon/><TextField required id="rg" label="RG" name="rg" onChange={(e)=> setRg(e.target.value)}/>
-          </Grid>
-        </Grid>
-
-        <Grid container xs={12} spacing={1}>
-          <Grid  item xs={12}>  
-              <AssignmentIcon/><TextField required id="cpf" label="CPF" name="cpf" onChange={(e) => setCpf(e.target.value)}/>
-          </Grid>
-        </Grid>
-
-        <Grid container xs={12} spacing={1}>
-          <Grid  item xs={12} >   
-          <div class="div-select"> 
-            <WcIcon/><TextField
-              id="genero"
-              select  
-              label="Gênero"
-              value={genero}
-              onChange={handleChange}
-              className={classes.root}
-              SelectProps={{
-              native: true, }}>
-                {generos.map((option) => (
-                  <option key={option.value} value={option.value}>
-                    {option.label}
-                  </option>))}
-                  </TextField>
-                  </div>
+          <Grid item xs={12} spacing={1}>
+            <Grid item xs={12}>
+              <Typography variant="h4" component="h5">
+                Cadastrar Dados
+              </Typography>
             </Grid>
-        </Grid>
+          </Grid>
 
-        <Grid container xs={12} spacing={1}>
-         <Grid  item xs={12}>
-            <AssignmentIcon/><TextField
+          <Grid container xs={12} spacing={1}>
+
+            <Grid item xs={6} spacing={1}>
+              <TextField fullWidth={true} id="nome" label="Nome Completo" name="nome"
+                onChange={(e) => setNome(e.target.value)}
+                value={Nome}
+                autoComplete='off' />
+            </Grid>
+            <Grid item xs={6} spacing={1}>
+              <TextField fullWidth={true} id="rg" label="RG" name="rg"
+                onChange={(e) => setRg(e.target.value)}
+                value={Rg} />
+            </Grid>
+          </Grid>
+          <Grid container xs={12} spacing={1}>
+            <Grid item xs={6}>
+              <TextField fullWidth={true} id="cpf" label="CPF" name="cpf"
+                onChange={(e) => setCpf(e.target.value)}
+                value={Cpf} />
+            </Grid>
+            <Grid item xs={6}>
+              <TextField
+                id="date"
+                label="DataNascimento"
+                type="date"
+                defaultValue="2017-05-24"
+                onChange={(e) => setNascimento(e.target.value)}
+                value={Nascimento}
+                className={classes.textField}
+                InputLabelProps={{
+                  shrink: true,
+                }} />
+            </Grid>
+          </Grid>
+
+          <Grid container xs={12} spacing={1}>
+            <Grid item xs={6}>
+              <TextField fullWidth={true} id="telefone" label="Telefone" name="telefone"
+                onChange={(e) => setTelefone(e.target.value)}
+                value={Telefone2}
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <TextField fullWidth={true} id="celular" label="Celular" name="celular"
+                onChange={(e) => setCelular(e.target.value)}
+                value={Telefone}
+              />
+            </Grid>
+          </Grid>
+
+          <Grid container xs={12} spacing={1}>
+            <Grid item xs={12}>
+              <TextField fullWidth={true} id="email" label="E-mail" name="email"
+                onChange={(e) => setEmail(e.target.value)}
+                value={Email}
+              />
+            </Grid>
+          </Grid>
+
+          <Grid container xs={12} spacing={1}>
+
+            <Grid item xs={12}>
+              <TextField
                 id="civil"
                 select
                 className={classes.root}
                 label="Estado Civil"
-                value={estadocivi}
-                onChange={handleCivil}
-                fullWidth={false}
+                value={EstadoCivil}
+                onChange={(e) => setCivil(e.target.value)}
                 SelectProps={{
-                native: true,
+                  native: true,
                 }}>
-                  {estadocivil.map((option) => (
-                    <option key={option.value} value={option.value}>
-                      {option.label}
-                    </option>))}</TextField>
-            </Grid>  
-          </Grid>     
-
-          <Grid container xs={12} spacing={1}> 
-            <Grid  item xs={12}>         
-              <DateRangeIcon/><TextField required id="nascimento" label="Data Nascimento" name="nascimento" onChange={(e) => setNascimento(e.target.value)}/>
-              </Grid>  
-          </Grid> 
-
-          <Grid container xs={12} spacing={1}> 
-            <Grid  item xs={12}>  
-              <SettingsCellIcon/><TextField required id="celular" label="Celular" name="celular" onChange={(e) => setTelefone(e.target.value)} />
-              </Grid>  
-          </Grid>  
-
-          <Grid container xs={12} spacing={1}> 
-            <Grid  item xs={12}>
-                <SettingsPhoneIcon/><TextField id="telefone" label="Telefone" name="telefone" onChange={(e) => setTelefone2(e.target.value)} />
-              </Grid>  
-          </Grid>  
-
-          <Grid container xs={12} spacing={1}> 
-            <Grid  item xs={12}>
-              <EmailIcon/><TextField required id="email" label="E-mail" name="email" onChange={(e) => setEmail(e.target.value)}/>
-              </Grid>  
-          </Grid>  
-
-          <Grid container xs={12} spacing={1}> 
-            <Grid  item xs={12}>
-              <EmailIcon/><TextField required id="profissao" label="Profissão" name="profissao" onChange={(e) => setProfissao(e.target.value)} />
-              </Grid>  
-          </Grid> 
-
-          <Grid container xs={12} spacing={1}> 
-            <Grid  item xs={12}>
-              <DriveEtaIcon/><TextField required id="veiculo" label="Possui Veículo?" name="veiculo" onChange={(e) => setPossuiVeiculo(e.target.value)} />
-            </Grid>  
+                {estadoCivil.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>))}</TextField>
+            </Grid>
           </Grid>
-          
-          <Grid container xs={12} spacing={1}> 
-            <Grid  item xs={12}>
-                <AssignmentIcon/><TextField required id="habilitação" label="Possui Habilitação?" name="habilitação"
-                        onChange={(e) => setPossuiHabilitacao(e.target.value)} />
+          <Grid container xs={12} spacing={1}>
+            <   Grid item xs={6}>
+              <FormControl component="fieldset">
+                <FormLabel component="legend">Possui Habilitação</FormLabel>
+                <RadioGroup
+                  aria-label="habilitacao"
+                  name="controlled-radio-buttons-group"
+                  value={PossuiHabilitacao}
+                  onChange={handleChange}
+                  fullWidth={false}
+                >
+                  <FormControlLabel value="s" control={<Radio />} label="Sim" />
+                  <FormControlLabel value="n" control={<Radio />} label="Não" />
+                </RadioGroup>
+              </FormControl>
+            </Grid>
+            <Grid item xs={6}>
+              <FormControl component="fieldset">
+                <FormLabel component="legend">Possui Veiculo</FormLabel>
+                <RadioGroup
+                  aria-label="veiculo"
+                  name="controlled-radio-buttons-group"
+                  value={PossuiVeiculo}
+                  onChange={handleVChange}
+                >
+                  <FormControlLabel value="s" control={<Radio />} label="Sim" />
+                  <FormControlLabel value="n" control={<Radio />} label="Não" />
+                </RadioGroup>
+              </FormControl>
+            </Grid>
           </Grid>
-          </Grid>
-          </Grid>
-      </Paper>
-    
-        <Grid item xs={12} className={classes.paper} >
-          <a href ='http://localhost:3000/portal/endereco'>
-            <Button  
-              fullWidth                    
-              variant="contained"
-              color="primary">
-              AVANÇAR
-            </Button></a>
         </Grid>
-        </form>     
+
+      </Paper>
+
+      <Grid item xs={12} className={classes.paper} >
+        <Button
+          type="submit"
+          fullWidth
+          variant="contained"
+          color="primary"
+        >
+          AVANÇAR
+        </Button>
+      </Grid>
+    </form>
+
   );
 
 }
 
-                    
+
 
 
 

@@ -67,7 +67,7 @@ export default function AcessoSistema() {
     const [error, setError] = useState('');
     
 
-    useEffect(() => { console.log("Deu erro") }, [error])
+   
 
     async function handleSignIn(e) {
         e.preventDefault();
@@ -82,7 +82,9 @@ export default function AcessoSistema() {
                     Login,
                     Passwd
                 }).then(function(response) {
+                    console.log(response)
                     localStorage.setItem('@login', Login)
+                    localStorage.setItem('@idusuario', response.data.id)
                     window.location.href = "/portal/home";
 
                 }).catch(function (error) {
