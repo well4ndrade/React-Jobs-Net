@@ -75,6 +75,10 @@ export default function SpacingGrid() {
 
         } catch (error) {
         }
+<<<<<<< HEAD
+    ]
+ 
+=======
     }
 
     async function buscaVagas1() {
@@ -96,6 +100,7 @@ export default function SpacingGrid() {
     useEffect(() => {
         buscaVagas()
     }, [])
+>>>>>>> 7b0c74e458c02f89b89f7672858305509494d3d4
 
     useEffect(() => {
         buscaVagas1()
