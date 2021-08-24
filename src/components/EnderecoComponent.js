@@ -14,13 +14,10 @@ import Filter5Icon from '@material-ui/icons/Filter5';
 import LocalLibraryIcon from '@material-ui/icons/LocalLibrary';
 import PinDropIcon from '@material-ui/icons/PinDrop';
 import StreetviewIcon from '@material-ui/icons/Streetview';
+import MiniDrawer from '../components/MenuComponent.js';
 import axios from "axios";
 
 function App() {
-
- 
-
-
     function onSubmit(values, actions) {
       console.log('SUBMIT', values);
     }
@@ -41,6 +38,12 @@ function App() {
         setFieldValue('bairro', data.bairro);
         setFieldValue('cidade', data.localidade);
         setFieldValue('uf', data.uf);
+        setLogradouro(data.logradouro);
+        setBairro(data.bairro);
+        setCidade(data.localidade);
+        setUf(data.uf);
+        setCep(data.cep);
+     
       });
   }
   
@@ -79,28 +82,23 @@ function App() {
 }));
 
 const classes = useStyles();
-const [Nome, setNome] = useState('');
-const [Cpf, setCpf] = useState('');
-const [Rg, setRg] = useState('');
-const [Genero, setgenero] = useState('');
-const [Nascimento, setnascimento] = useState('');
-const [Telefone, settelefone] = useState('');
-const [Telefone2, settelefone2] = useState('');
-const [Email, setemail] = useState('');
-const [Profissao, setprofissao] = useState('');
-const [Estadocivi, setestadocivi] = useState('');
-const [PossuiVeiculo, setpossuiVeiculo] = useState('');
-const [PossuiHabilitacao, setpossuiHabilitacao] = useState('');
-const [cep, setcep] = useState('');
-const [logradouro, setlogradouro] = useState('');
-const [numero, setnumero] = useState('');
-const [complemento, setcomplemento] = useState('');
-const [bairro, setbairro] = useState('');
-const [cidade, setcidade] = useState('');
-const [uf, setuf] = useState('');
+const [cep, setCep] = useState('');
+const [logradouro, setLogradouro] = useState('');
+const [numero, setNumero] = useState('');
+const [complemento, setComplemento] = useState('');
+const [bairro, setBairro] = useState('');
+const [cidade, setCidade] = useState('');
+const [uf, setUf] = useState('');
 const [error, setError] = useState('');
 async function handleSignIn(e) {
   e.preventDefault();
+  console.log(cep);
+  console.log(logradouro);
+  console.log(numero);
+  console.log(complemento);
+  console.log(bairro);
+  console.log(cidade);
+  console.log(uf);
   localStorage.clear();
 
   if (cep === '' || logradouro === '' || numero === '' || bairro === '' || cidade === '' || uf === '' ) {
@@ -115,21 +113,21 @@ async function handleSignIn(e) {
             bairro,
             cidade,
             uf,
-            "pais" : "Brasil",
+            
             
           }).then(function(response) {
               console.log('Cadastrado');
               
 
           }).catch(function (error) {
-              console.log('Usuario já existe');
+              console.log('Erro ao concluir cadastro. Verifique o prenchumento dos campos.');
             
           });
       } catch (error) {
          
       }
   
-  setError("As senhas não conferem.");
+  setError("Os campos não foram totalmente preenchidos.");
 
 }
 } 
@@ -157,7 +155,7 @@ async function handleSignIn(e) {
               <Grid item xs={12}  imagem className={classes.imagem}>
                 <img class="displayed" src={logo} alt={"logo"} /> 
               </Grid>
-            </Grid> 
+            </Grid>
            
             <Grid container xs={12} spacing={1}>   
             <Grid  item xs={12}>
@@ -170,25 +168,25 @@ async function handleSignIn(e) {
           
              <Grid container xs={12} spacing={1}>   
               <Grid  item xs={12} fullWidth={true}> 
-                  <LocationOnIcon/><TextField name="cep" type="text" label="CEP"  onBlur={(ev) => onBlurCep(ev, setFieldValue)} />
+                  <LocationOnIcon/><Field name="cep" type="text" label="CEP"  onBlur={(ev) => onBlurCep(ev, setFieldValue)} />
               </Grid>
              </Grid>
 
              <Grid container xs={12} spacing={1}>   
               <Grid  item xs={12}>  
-                <MyLocationIcon/> <Field name="logradouro" label="Logradouro"   type="text" />  
+                <MyLocationIcon/> <Field name="logradouro" label="Logradouro"/>
               </Grid>
             </Grid>
 
               <Grid container xs={12} spacing={1}>   
                <Grid  item xs={12}>  
-                <Filter5Icon/> <Field  name="numero" label="Número" type="text" />
-              </Grid>
+                <Filter5Icon/> <Field  name="value" label="Número" type="text" onChange={(e) => setNumero(e.target.value)} />
+             </Grid>
             </Grid>
 
               <Grid container xs={12} spacing={1}>   
                 <Grid  item xs={12}>  
-                <PinDropIcon/><Field name="complemento" label="Complemento"   type="text" />
+                <PinDropIcon/><Field name="value" label="Complemento"   type="text" onChange={(e) => setComplemento(e.target.value)}/>
                  </Grid>
             </Grid>
 
