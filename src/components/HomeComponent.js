@@ -37,13 +37,20 @@ const useStyles = makeStyles((theme) => ({
     },
     titulo: {
         flexGrow: 1,
-        marginTop: 30,
+        marginTop: 10,
         textAlign: 'center',
         color:'black'
     },
     subtitulo: {
         flexGrow: 1,
         marginTop: 30,
+        textAlign: 'center',
+        color:'black'
+    },
+    subtitulo1: {
+        flexGrow: 1,
+        marginTop: 10,
+        marginBottom: 10,
         textAlign: 'center',
         color:'black'
     },
@@ -111,7 +118,6 @@ export default function SpacingGrid() {
     }
 
     return (
-
         <form
             id="form"
             name="form"
@@ -136,7 +142,7 @@ export default function SpacingGrid() {
                         </Typography>
                     </Grid>
                 </Grid>
-             
+
 
                 <Grid item xs={12}>
                     <Autocomplete
@@ -154,15 +160,22 @@ export default function SpacingGrid() {
                 <Button
                     variant="contained"
                     color="Primary"
-                    href="/portal/cargos/"
+                    href="/portal/cargos"
                     fullWidth={true}
                 >
-                    PESQUISAR TODAS AS VAGAS
+                    VER TODAS AS VAGAS
                 </Button>
             </Grid>
             <Divider />
             <Paper>
-            <Grid
+                <Grid container spacing={1} >
+                    <Grid item xs={12}>
+                        <Typography variant="h6" component="h6" className={classes.subtitulo1}>
+                            VAGAS EM DESTAQUE
+                        </Typography>
+                    </Grid>
+                </Grid>
+                <Grid
                     container
                     spacing={2}
                 >
