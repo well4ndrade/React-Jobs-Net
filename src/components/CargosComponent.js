@@ -4,6 +4,8 @@ import axios from "axios";
 import Paper from "@material-ui/core/Paper";
 import MUIDataTable from "mui-datatables";
 import LinearProgress from '@material-ui/core/LinearProgress';
+import Grid from '@material-ui/core/Grid';
+import Button from "@material-ui/core/Button";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -98,8 +100,9 @@ export default function CargosComponent() {
                     columns={columns}
                     options={options}
                 />
+                
             </Paper>
             )}
-        </div>
+        </div>    
     );
 }

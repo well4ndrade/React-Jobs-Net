@@ -37,13 +37,20 @@ const useStyles = makeStyles((theme) => ({
     },
     titulo: {
         flexGrow: 1,
-        marginTop: 30,
+        marginTop: 10,
         textAlign: 'center',
         color:'black'
     },
     subtitulo: {
         flexGrow: 1,
         marginTop: 30,
+        textAlign: 'center',
+        color:'black'
+    },
+    subtitulo1: {
+        flexGrow: 1,
+        marginTop: 10,
+        marginBottom: 10,
         textAlign: 'center',
         color:'black'
     },
@@ -96,7 +103,7 @@ export default function SpacingGrid() {
         localStorage.setItem('VAGA', nome);
         localStorage.setItem('LOCAL', local);
         localStorage.setItem('SALARIO', salario);
-        window.location.href = `/portal/cargos`;
+        window.location.href = `/portal/vagas`;
     }
 
     useEffect(() => {
@@ -107,11 +114,10 @@ export default function SpacingGrid() {
     function vagaEscolhida(vaga) {
         console.log(vaga)
         localStorage.setItem('VAGAE', vaga);
-        window.location.href = "/portal/curriculo";
+        window.location.href = "/portal/vagas";
     }
 
     return (
-
         <form
             id="form"
             name="form"
@@ -136,7 +142,7 @@ export default function SpacingGrid() {
                         </Typography>
                     </Grid>
                 </Grid>
-             
+
 
                 <Grid item xs={12}>
                     <Autocomplete
@@ -152,17 +158,23 @@ export default function SpacingGrid() {
             </Paper>
             <Grid item xs={12} className={classes.paper} >
                 <Button
-                    //onClick={(e)=> setNome(e.target.value)}
                     variant="contained"
                     color="Primary"
-                    href="/portal/cargos/"
+                    href="/portal/cargos"
                     fullWidth={true}
                 >
-                    BUSCAR
+                    VER TODAS AS VAGAS
                 </Button>
             </Grid>
             <Divider />
             <Paper>
+                <Grid container spacing={1} >
+                    <Grid item xs={12}>
+                        <Typography variant="h6" component="h6" className={classes.subtitulo1}>
+                            VAGAS EM DESTAQUE
+                        </Typography>
+                    </Grid>
+                </Grid>
                 <Grid
                     container
                     spacing={2}
@@ -173,7 +185,7 @@ export default function SpacingGrid() {
 
                                 onClick={() => vagaDetalhe(option1.id, option1.local, option1.nome, option1.salario)}
 
-                                style={{ backgroundColor: "#Primary", textAlign: "center", fontSize: 15, color: "#FFFFFF" }}>
+                                style={{ backgroundColor: "#2aa745", textAlign: "center", fontSize: 15, color: "#FFFFFF" }}>
                                 <Typography>
                                     Vaga
                                 </Typography>
