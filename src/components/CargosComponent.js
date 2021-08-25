@@ -102,7 +102,19 @@ export default function CargosComponent() {
                 />
                 
             </Paper>
+            
             )}
+            <Grid item xs={12} className={classes.paper} >
+            <Button
+              style={{ backgroundColor: "#primary", fontSize: 15, color: "#FFFFFF" }}
+              type="submit"
+              variant="contained"
+              color="primary"
+              href="/portal/curriculo"
+              fullWidth={true}>
+              CADASTRAR CURRÍCULO
+            </Button>
+        </Grid>
         </div>    
     );
 }
