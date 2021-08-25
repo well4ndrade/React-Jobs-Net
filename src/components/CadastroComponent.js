@@ -135,9 +135,11 @@ export default function CadastroComponent() {
               salario
             }).then(function(response) {
             setRetorno(response.data)
+              alert('Vaga cadastrada com sucesso!!');
               window.location.href = "/portal/cadastro";
           }).catch(function (error) {
-              if (error.response) {
+            alert('Vaga já existe cadastrada!!');
+              if (error.response) {                  
                   console.log(error.response.headers);
               }
               else if (error.request) {

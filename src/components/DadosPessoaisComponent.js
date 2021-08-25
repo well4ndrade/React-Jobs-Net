@@ -59,7 +59,6 @@ export default function MultilineTextFields() {
   const [Email, setEmail] = useState('');
   const [PossuiVeiculo, setVeiculo] = useState('');
   const [PossuiHabilitacao, setHabilitacao] = useState('');
-  const [error, setError] = useState('');
   const [Nome, setNome] = useState("");
   const [Telefone, setCelular] = useState("");
   const [response, setResponse] = useState('');
@@ -82,7 +81,6 @@ export default function MultilineTextFields() {
     if (Nome === '' || Cpf === '' || Rg === '' || Nascimento === '' || Telefone === '' || Email === '' || EstadoCivil === '' || PossuiVeiculo === '' || PossuiHabilitacao === '') {
      alert('Preencha os dados obrigatorios para continuar.')
     } else {
-      setError('')
       try {
         axios.post("https://localhost:5001/Usuarios",{
           Nome,
@@ -98,15 +96,16 @@ export default function MultilineTextFields() {
           dadoId
         }).then(function (response) {
           localStorage.setItem('@idusuario', response.data.id)
+          alert('Dados pessoais salvo com sucesso!!');
           window.location.href = "/portal/endereco";
           
         }).catch(function (error) {
           console.log(response);
-          setError("Houve um problema com o login, verifique suas credenciais ou click em recuperar sua senha.");
+          alert("Esse CPF já encontra cadastrado em nossa base de dados, Entre em contato com o Suporte");
 
         });
       } catch (error) {
-        setError("Houve um problema com o login, verifique suas credenciais ou entre em contato com o T.I.");
+        alert("Esse CPF já encontra cadastrado em nossa base de dados, Entre em contato com o Suporte");
       }
     }
   }
