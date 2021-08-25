@@ -20,11 +20,11 @@ const useStyles = makeStyles((theme) => ({
         padding: theme.spacing(2),
         textAlign: 'center',
         color: theme.palette.text.secondary,
-        botao: {
-            flexGrow: 1,
-            itemAlign: 'center',
-         
-        },
+    },
+    botao: {
+        flexGrow: 1,
+        itemAlign: 'center',
+     
     },
     textField: {
         width: '100%',
@@ -64,6 +64,15 @@ const useStyles = makeStyles((theme) => ({
         textAlign: 'center',
         color: theme.palette.text.secondary,
     },
+    slide: {
+        flexGrow: 1,
+        backgroundColor: "#26388Fab", 
+        textAlign: "center", 
+        fontSize: 15, 
+        color: "#FFFFFF",
+        marginLeft: 10,
+        marginRight: 10,
+    }
 }));
 
 
@@ -103,7 +112,7 @@ export default function SpacingGrid() {
         localStorage.setItem('VAGA', nome);
         localStorage.setItem('LOCAL', local);
         localStorage.setItem('SALARIO', salario);
-        window.location.href = `/portal/vagas`;
+        window.location.href = `/portal/cargos`;
     }
 
     useEffect(() => {
@@ -175,21 +184,14 @@ export default function SpacingGrid() {
                         </Typography>
                     </Grid>
                 </Grid>
-                <Grid
-                    container
-                    spacing={2}
-                >
+                <Grid container spacing={2}>
                     {dadosVagas1.map((option1) => (
-                        <Grid item xs={12} sm={6} md={3}>
-                            <Paper
-
-                                onClick={() => vagaDetalhe(option1.id, option1.local, option1.nome, option1.salario)}
-
-                                style={{ backgroundColor: "#2aa745", textAlign: "center", fontSize: 15, color: "#FFFFFF" }}>
-                                <Typography>
-                                    Vaga
-                                </Typography>
-                                <Typography>
+                        <Grid item xs={12} sm={6} md={4} >
+                            <Paper 
+                            className={classes.slide}
+                            onClick={() => vagaDetalhe(option1.id, option1.local, option1.nome, option1.salario)}
+                            >
+                                <Typography variant="h5">
                                     {option1.nome}
                                 </Typography>
                                 <Typography>
@@ -202,7 +204,7 @@ export default function SpacingGrid() {
                                     Salário
                                 </Typography>
                                 <Typography>
-                                    R$ {option1.salario}
+                                    R$ {option1.salario},00
                                 </Typography>
                             </Paper>
                         </Grid>
