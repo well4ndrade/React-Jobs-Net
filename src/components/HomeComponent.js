@@ -152,18 +152,17 @@ export default function SpacingGrid() {
             </Paper>
             <Grid item xs={12} className={classes.paper} >
                 <Button
-                    //onClick={(e)=> setNome(e.target.value)}
                     variant="contained"
                     color="Primary"
                     href="/portal/cargos/"
                     fullWidth={true}
                 >
-                    BUSCAR
+                    PESQUISAR TODAS AS VAGAS
                 </Button>
             </Grid>
             <Divider />
             <Paper>
-                <Grid
+            <Grid
                     container
                     spacing={2}
                 >
@@ -173,7 +172,7 @@ export default function SpacingGrid() {
 
                                 onClick={() => vagaDetalhe(option1.id, option1.local, option1.nome, option1.salario)}
 
-                                style={{ backgroundColor: "#Primary", textAlign: "center", fontSize: 15, color: "#FFFFFF" }}>
+                                style={{ backgroundColor: "#2aa745", textAlign: "center", fontSize: 15, color: "#FFFFFF" }}>
                                 <Typography>
                                     Vaga
                                 </Typography>
