@@ -43,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
     },
     subtitulo: {
         flexGrow: 1,
-        marginTop: 30,
+        marginTop: 20,
         textAlign: 'center',
         color:'black'
     },
@@ -159,10 +159,11 @@ export default function VagasComponent() {
             type="submit"
             variant="contained"
             color="primary"
+            href="/portal/curriculo"
             fullWidth={true}>
             CADASTRAR CURRÍCULO
           </Button>
-        </Grid>
+      </Grid>
     </form>
   );
 }
